@@ -1,0 +1,225 @@
+/* .UserListPageContainer {} */
+
+.userListSearchBox {
+    width: 1300px;
+    height: 70px;
+    margin-top: 20px;
+    margin-left: 30px;
+    line-height: 40px;
+    /* background-color: aqua; */
+    display: flex;
+    align-items: center;
+}
+
+.userListSearchTitle {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 17px;
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border-radius: 5px;
+}
+
+.userListSearchInputText {
+    display: inline-block;
+    width: 200px;
+    height: 27px;
+    margin-left: 20px;
+}
+
+.userListSearchButton {
+    display: inline-block;
+    width: 90px;
+    height: 34px;
+    margin-left: 5px;
+    border: none;
+    background-color: rgb(166, 166, 166);
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.userListSearchButton:hover {
+    background-color: rgb(141, 141, 141);
+}
+
+/* [select 설정]========================================================================== */
+.userListSelectIsCurrentUse,
+.userListSelectIsBenned {
+    display: inline-block;
+    width: 90px;
+    height: 30px;
+    margin-left: 200px;
+    text-align: center;
+}
+
+
+/* [스크롤 설정]================================================================================ */
+.userListPageTable {
+    width: 1300px;
+    height: 450px;
+    margin-top: 25px;
+    margin-left: 30px;
+    border: 1px solid black;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.UserListPageContainer>table>tbody {
+    display: block;
+    overflow-y: scroll;
+    max-height: 394px;
+}
+
+.UserListPageContainer>table>thead,
+.UserListPageContainer>table>tbody>tr {
+    display: table;
+    width: 100%;
+}
+
+
+/* ===[tr : hover]============ */
+.UserListPageContainer>table>tbody>.userListTbodyTr:hover {
+    background-color: rgb(220, 220, 220);
+}
+
+.UserListPageContainer>table>tbody>.userListTbodyTrBenned {
+    background-color: rgb(220, 220, 220);
+    opacity: 0.3;
+}
+
+
+/* [테이블 column 넓이]================================================================== */
+
+.userListPageTable>thead>tr>th:nth-child(1),
+.userListPageTable>tbody>tr>td:nth-child(1) {
+    width: 180px;
+    /* background-color: red; */
+}
+
+.userListPageTable>thead>tr>th:nth-child(2),
+.userListPageTable>tbody>tr>td:nth-child(2) {
+    width: 120px;
+    /* background-color: orange; */
+}
+
+.userListPageTable>thead>tr>th:nth-child(3),
+.userListPageTable>tbody>tr>td:nth-child(3) {
+    width: 150px;
+    /* background-color: yellow; */
+}
+
+.userListPageTable>thead>tr>th:nth-child(4),
+.userListPageTable>tbody>tr>td:nth-child(4) {
+    width: 170px;
+    /* background-color: green; */
+}
+
+.userListPageTable>thead>tr>th:nth-child(5),
+.userListPageTable>tbody>tr>td:nth-child(5) {
+    width: 80px;
+    /* background-color: rgb(120, 120, 255); */
+}
+
+.userListPageTable>thead>tr>th:nth-child(6),
+.userListPageTable>tbody>tr>td:nth-child(6) {
+    width: 50px;
+    /* background-color: rgb(169, 77, 255); */
+}
+
+.userListPageTable>thead>tr>th:nth-child(7),
+.userListPageTable>tbody>tr>td:nth-child(7) {
+    width: 50px;
+    /* background-color: aquamarine; */
+}
+
+.userListPageTable>thead>tr>th:nth-child(8),
+.userListPageTable>tbody>tr>td:nth-child(8) {
+    width: 80px;
+    /* background-color: rgb(167, 119, 119); */
+}
+
+.userListPageTable>thead>tr>th:nth-child(9),
+.userListPageTable>tbody>tr>td:nth-child(9) {
+    width: 80px;
+    /* background-color: cornflowerblue; */
+}
+
+.userListPageTable>thead>tr>th:nth-child(10) {
+    width: 11px;
+    /* 스크롤바 너비 보정값 */
+}
+
+.userListPageTable>thead>tr>th {
+    background-color: rgb(238, 238, 238);
+}
+
+
+/* [기타 넓이 높이 설정]================================================================================================================== */
+.userListPageTable>thead>tr>th {
+    height: 30px;
+    border-bottom: 3px solid black;
+}
+
+.UserListPageContainer>table>tbody>tr {
+    height: 40px;
+}
+
+.userListPageTable>tbody>tr>td {
+    border-bottom: 1px solid gray;
+}
+
+.UserListPageContainer>table>thead>tr>th {
+    font-size: 16px;
+}
+
+/* ================================================ */
+.noSearchedUserList>td {
+    height: 394px;
+    font-size: 65px;
+    font-weight: bold;
+}
+
+.noSearchedUserList>td:hover {
+    background-color: white;
+}
+
+/* =====[ben Button]============================= */
+.unBenButton,
+.benButton {
+    width: 80px;
+    height: 28px;
+}
+
+.unBenButton>button,
+.benButton>button {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.benButton>button {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+.UserListPageContainer>table>tbody>.userListTbodyTrBenned>td>.unBenButton>button {
+    background-color: rgb(0, 189, 0) !important;
+    opacity: 1 !important;
+}
+
+.UserListPageContainer>table>tbody>.userListTbodyTrBenned>td:nth-child(7) {
+    color: red;
+    font-weight: bold;
+}
+
+.UserListPageContainer>table>tbody>.userListTbodyTrBenned>td>.unBenButton>button:hover {
+    background-color: rgb(0, 68, 0) !important;
+    color: white;
+    font-weight: bold;
+    opacity: 1 !important;
+}

@@ -1,0 +1,183 @@
+.UserInfoBoxContainer {
+    width: 300px;
+    height: 470px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 22px;
+    background: linear-gradient(to bottom, rgb(177, 169, 252), rgb(141, 128, 253));
+    padding-bottom: 10px;
+}
+
+.userInfoBoxTitle {
+    width: 240px;
+    margin-left: 30px;
+    display: flex;
+    align-items: end;
+    /* background-color: aqua; */
+}
+
+.userInfoBoxTitle>span {
+    display: inline-block;
+    font-size: 33px;
+    font-weight: 800;
+    margin-bottom: 0px;
+}
+
+
+/* ============================================================================ */
+.userLoginedState {
+    margin-left: 30px;
+}
+
+.loginedStateUserWelcome>.welcomeId {
+    font-weight: 600;
+}
+
+.loginedStateUserWelcome>.welcomeComment {
+    font-size: 13px;
+}
+
+
+/* ============================================================================ */
+.userIsCurrentUseAuthenticationBox {
+    width: 240px;
+    height: 120px;
+    margin-left: 30px;
+    /* background-color: rgb(177, 169, 252); */
+}
+
+.userInfoUsedSeatNumBox>span:nth-child(1) {
+    font-size: 22px;
+    font-weight: bold;
+    /* font-style: italic; */
+}
+
+.userInfoUsedSeatNumBox>span:nth-child(3) {
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* ============================================================================ */
+.userIsCurrentUseAuthenticationBox>.userIsCurrentUseAuthenticationBoxOccupied {
+    background-color: rgb(195, 189, 251);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 90px;
+}
+
+.userInfoUppProduct {
+    text-align: center;
+    font-weight: bold;
+    font-size: 21px;
+    margin-top: 3px;
+}
+
+.userInfoUppProduct>span:nth-child(4) {
+    font-size: 23px;
+}
+
+.userInfoUppProduct>span:nth-child(3),
+.userInfoUppProduct>span:nth-child(6) {
+    font-size: 27px;
+}
+
+
+/* ====[남은시간 표기]=================================================================== */
+.userInfoUppUsedAvailableBox {
+    width: 240px;
+    height: 38px;
+    line-height: 38px;
+    margin-top: 12px;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    /* background-color: aqua; */
+}
+
+.userInfoUppTimePass>span:nth-child(1) {
+    font-size: 14px;
+}
+
+.userInfoUppTimePass>span:nth-child(3),
+.userInfoUppTimePass>span:nth-child(5) {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.userInfoUppTimePass>span:nth-child(4),
+.userInfoUppTimePass>span:nth-child(6) {
+    font-size: 10px;
+}
+
+.userInfoUppTimePass>span:nth-child(3),
+.userInfoUppTimePass>span:nth-child(4),
+.userInfoUppTimePass>span:nth-child(5),
+.userInfoUppTimePass>span:nth-child(6) {
+    color: red;
+}
+
+.userInfoUppDayPass>span:nth-child(1) {
+    font-size: 14px;
+}
+
+.userInfoUppDayPass>span:nth-child(3) {
+    color: red;
+    font-weight: bold;
+}
+
+/* ============================================================================ */
+.userInfoIsCurrentUse {
+    width: 240px;
+    height: 109px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 30px;
+}
+
+.userInfoIsCurrentUseFalse,
+.userInfoIsCurrentUseTrue,
+.userInfoIsCurrentUseFalse_off,
+.userInfoIsCurrentUseTrue_off {
+    width: 100%;
+    height: 47px;
+    line-height: 47px;
+    font-size: 24px;
+    margin: 0;
+    color: black;
+    font-weight: 550;
+    text-align: center;
+    border-radius: 13px;
+    background-color: white;
+}
+
+.userInfoIsCurrentUseFalse_off {
+    opacity: 0.1;
+}
+
+.userInfoIsCurrentUseTrue_off {
+    opacity: 0.1;
+}
+
+/* ==================================================== */
+.loginedStateMenu {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.loginedStateMenu>div>button {
+    font-size: 23px;
+    font-weight: 550;
+    background-color: transparent;
+    border: none;
+    transition: transform 0.5s ease;
+}
+
+.loginedStateMenu>div>button:hover {
+    cursor: pointer;
+    transform: scale(1.3);
+}

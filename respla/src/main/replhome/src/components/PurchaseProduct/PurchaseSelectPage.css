@@ -1,0 +1,56 @@
+.PurchaseSelectPageContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgb(241, 250, 255), rgb(202, 236, 255));
+    /* background-color: rgb(177, 169, 252); */
+    margin: 0 auto;
+    align-items: center;
+}
+
+
+/* ===================================================================== */
+.selectProductBox {
+    display: flex;
+    justify-content: space-around;
+    gap: 200px;
+}
+
+.purchaseTimePass,
+.purchaseDayPass,
+.purchaseFixed {
+    width: 220px;
+    height: 400px;
+    margin-top: 60px;
+    border: none;
+
+}
+
+.purchaseTimePass>button,
+.purchaseDayPass>button,
+.purchaseFixed>button {
+    display: inline-block;
+    border: none;
+    width: 100%;
+    height: 100%;
+    font-size: 50px;
+    background-color: rgb(67, 225, 130);
+    border-radius: 22px;
+    transition: transform 0.5s ease;
+}
+
+.purchaseDayPass>button {
+    background-color: rgb(131, 118, 255);
+}
+
+.purchaseFixed>button {
+    background-color: rgb(71, 56, 204);
+}
+
+.purchaseTimePass>button:hover,
+.purchaseDayPass>button:hover,
+.purchaseFixed>button:hover {
+    transform: scale(1.1) translate(-7%, -7%);
+    cursor: pointer;
+}

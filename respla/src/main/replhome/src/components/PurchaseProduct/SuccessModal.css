@@ -1,0 +1,84 @@
+.SuccessModalContainerBackGround {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(55, 55, 55, 0.8);
+}
+
+.SuccessModalContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    height: 550px;
+    border-radius: 22px;
+    background-color: white;
+    z-index: 400;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+/* ============================== */
+.successModalTitle {
+    width: 400px;
+    height: 45px;
+    line-height: 45px;
+    margin-top: 150px;
+}
+
+.successModalTitle>span {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+
+/* ===[버튼]================================================================================== */
+.successModalButtonBox {
+    width: 600px;
+    height: 70px;
+    margin-top: 140px;
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: space-around;
+}
+
+.successModalButtonBox>button {
+    display: inline-block;
+    width: 200px;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(25, 74, 166);
+    color: white;
+    cursor: pointer;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.successModalButtonBox>button:nth-child(2) {
+    background-color: rgb(228, 228, 228);
+    color: black;
+}
+
+.successModalButtonBox>button:nth-child(1):hover {
+    background-color: rgb(6, 49, 130);
+}
+
+.successModalButtonBox>button:nth-child(2):hover {
+    background-color: rgb(186, 186, 186);
+}
+
+.successModalCloseTime {
+    margin-top: 70px;
+    font-size: 14px;
+}
+
+.successModalCloseTime>span:nth-child(1) {
+    font-weight: bold;
+    font-size: 16px;
+}

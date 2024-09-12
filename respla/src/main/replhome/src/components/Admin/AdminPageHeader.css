@@ -1,0 +1,42 @@
+.AdminPageHeaderContainer {
+    box-sizing: content-box;
+    background-color: black;
+    width: 100%;
+    height: 70px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.AdminHeaderLogoTitleBox {
+    /* background-color: rgb(219, 219, 255); */
+    width: 650px;
+    height: 70px;
+    margin: 10px auto;
+    grid-column: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.AdminHeaderLogoTitleBox>button {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 33px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    line-height: 78px;
+    transition: transform 0.5s ease;
+    box-sizing: border-box;
+    background: none;
+    border: none;
+}
+
+.AdminHeaderLogoTitleBox>button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}

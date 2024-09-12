@@ -1,0 +1,214 @@
+.CheckInUseProductsBackGround {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(80, 80, 80, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.CheckInUseProductsContainer {
+    position: fixed;
+    top: 14%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1050px;
+    height: 510px;
+    z-index: 20;
+    background-color: rgb(241, 248, 255);
+    transform: translateX(-50%);
+    border-radius: 10px;
+}
+
+
+/* ===[타이틀]======================================================================= */
+.checkInUseProductTitle {
+    width: 800px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.checkInUseProductTitle>span {
+    font-size: 33px;
+    font-weight: bold;
+}
+
+
+/* ==[기간권 / 시간권 테이블 선택 버튼 ]======================================================================== */
+.selectPassTypeButtonBox {
+    width: 950px;
+    height: 50px;
+    display: flex;
+    margin-top: 20px;
+
+}
+
+.selectPassTypeButtonBox>button {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    border: none;
+    font-size: 22px;
+    background-color: rgb(176, 216, 255);
+}
+
+.selectPassTypeButtonBox>button:hover {
+    cursor: pointer;
+}
+
+.choosedTabletypeButton {
+    background-color: rgb(94, 174, 255) !important;
+    font-weight: bold;
+    font-style: italic;
+}
+
+
+/* ==[table 전체 설정]============================================================= */
+.usableProductTable {
+    width: 950px;
+    height: 250px;
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+.CheckInUseProductsContainer>table>tbody {
+    display: block;
+    overflow-y: scroll;
+    max-height: 220px;
+    height: 220px;
+    border-left: 1px solid rgb(170, 170, 170);
+    border-right: 1px solid rgb(170, 170, 170);
+    border-bottom: 1px solid rgb(170, 170, 170);
+    background-color: rgb(255, 255, 255);
+}
+
+.CheckInUseProductsContainer>table>thead,
+.CheckInUseProductsContainer>table>tbody>tr {
+    display: table;
+    width: 100%;
+}
+
+.CheckInUseProductsContainer>table>thead {
+    background-color: rgb(211, 211, 211);
+    border-bottom: 2px solid black;
+}
+
+.usableProductTable>tbody>tr {
+    border-bottom: 1px solid rgb(205, 205, 205);
+}
+
+.usablePassSelected {
+    background-color: rgb(142, 142, 142);
+}
+
+.usablePass {
+    background-color: rgb(243, 243, 243);
+}
+
+.usableProductTable>tbody>tr:hover {
+    cursor: pointer;
+    background-color: rgb(222, 222, 222) !important;
+}
+
+
+/* [테이블 column 넓이:950px]================================================================== */
+.usableProductTable>thead>tr>th:nth-child(1),
+.usableProductTable>tbody>tr>td:nth-child(1) {
+    width: 280px;
+    /* background-color: red; */
+}
+
+.usableProductTable>thead>tr>.th_usedTime,
+.usableProductTable>thead>tr>.th_availableTime,
+.usableProductTable>tbody>tr>.td_usedTime,
+.usableProductTable>tbody>tr>.td_availableTime {
+    width: calc((950px - 281px - 18px) /2);
+    /* background-color: orange; */
+}
+
+.usableProductTable>tbody>tr>.td_availableTime {
+    font-weight: bold;
+}
+
+.usableProductTable>thead>tr>.th_usableValidPeriod,
+.usableProductTable>tbody>tr>.td_startEndDate {
+    width: calc(950px - 280px -14px);
+    font-weight: bold;
+    /* background-color: yellow; */
+}
+
+.usableProductTable>thead>tr>th:nth-child(4) {
+    width: 14px;
+    /* background-color: red; */
+    /* 스크롤바 너비 보정값 */
+}
+
+
+/* ======[기타 넓이 높이 설정]===================== */
+.usableProductTable>thead>tr>th {
+    height: 30px;
+}
+
+.usableProductTable>tbody>tr {
+    height: 50px;
+}
+
+.td_startEndDate {
+    height: 80px;
+}
+
+/* ==[ 최종 선택 버튼 ]========================================================================================================== */
+.usableProductTableButtonBox {
+    width: 900px;
+    height: 60px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.usableProductTableButtonBox>button {
+    display: inline-block;
+    width: 200px;
+    height: 100%;
+    border: none;
+    border-radius: 12px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/* ==[선택상품 사용 버튼]== */
+.usableProductTableButtonBox>.activeChooseButton {
+    background-color: rgb(26, 113, 201);
+    color: white;
+}
+
+.usableProductTableButtonBox>.activeChooseButton:hover {
+    background-color: rgb(15, 77, 139);
+    color: white;
+    cursor: pointer;
+}
+
+.usableProductTableButtonBox>.noneActiveChooseButton {
+    background-color: rgb(178, 178, 178);
+    color: white;
+    cursor: not-allowed;
+}
+
+/* ==[홈으로 버튼]== */
+.usableProductTableButtonBox>button:nth-child(2) {
+    background-color: rgb(227, 227, 227);
+}
+
+.usableProductTableButtonBox>button:nth-child(2):hover {
+    background-color: rgb(200, 200, 200);
+    cursor: pointer;
+}

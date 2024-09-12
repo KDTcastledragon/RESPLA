@@ -1,0 +1,208 @@
+.SeatPresentPageContainer {
+    margin: 0 auto;
+    width: 1200px;
+    height: 520px;
+
+    /* overflow-y: scroll; */
+    border: 1px solid black;
+
+}
+
+.seatRoom1 {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    overflow-y: scroll;
+    background-color: rgb(255, 253, 248);
+}
+
+
+.topCenter,
+.leftSide,
+.rightSide,
+.bottomCenter,
+.centerSection1,
+.centerSection2,
+.enteranceDoor,
+.verticalWall,
+.horizontalWall1,
+.horizontalWall2,
+.horizontalWall3 {
+    position: absolute;
+    box-sizing: border-box;
+    border: none;
+}
+
+.enteranceDoor {
+    top: 0;
+    left: 9%;
+    width: 70px;
+    height: 40px;
+    line-height: 40px;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.topCenter {
+    top: 0;
+    left: 50%;
+    margin-left: -24%;
+    width: 690px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    /* transform: translateX(-50%);
+    이걸쓰면 modal창도 같이 영향을 받아서 사용불가 */
+    /* background-color: red; */
+}
+
+.leftSide {
+    top: 120px;
+    left: 0;
+    width: 60px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    /* background-color: blue; */
+}
+
+.rightSide {
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 750px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* background-color: blue; */
+}
+
+.bottomCenter {
+    top: 701px;
+    left: 160px;
+    width: 840px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    background-color: blueviolet;
+}
+
+.centerSection1,
+.centerSection2 {
+    width: 220px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    /* background-color: rgb(152, 168, 228); */
+}
+
+.centerSection1 {
+    top: 150px;
+    left: 660px;
+    margin-left: -34%;
+    /* transform: translateX(-50%);
+    이걸쓰면 modal창도 같이 영향을 받아서 사용불가 */
+}
+
+.centerSection2 {
+    top: 150px;
+    left: 1100px;
+    margin-left: -34%;
+}
+
+.centerSectionSeats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px;
+    row-gap: 30px;
+    margin-top: 30px;
+}
+
+.verticalWall {
+    width: 30px;
+    height: 100%;
+}
+
+.horizontalWall1 {
+    top: 90px;
+    width: 100%;
+    height: 30px;
+}
+
+.horizontalWall2 {
+    top: 210px;
+    width: 100%;
+    height: 30px;
+}
+
+.horizontalWall3 {
+    top: 330px;
+    width: 100%;
+    height: 30px;
+}
+
+.verticalWall,
+.horizontalWall1,
+.horizontalWall2,
+.horizontalWall3 {
+    background-color: rgb(47, 47, 47);
+    color: rgb(148, 101, 73);
+}
+
+
+
+/* ======================================================================================= */
+.menuTypeModalContainerBackGround {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.menuTypeModalContainer {
+    width: 500px;
+    height: 300px;
+    background-color: white;
+    z-index: 300;
+    position: absolute;
+    top: 200px;
+    left: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 22px;
+}
+
+.menuTypeModalContainer>span:nth-child(1),
+.menuTypeModalContainer>span:nth-child(2) {
+    display: inline-block;
+    font-size: 29px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.menuTypeModalContainer>span:nth-child(1) {
+    margin-top: 90px;
+}
+
+.menuTypeModalContainer>button {
+    display: inline-block;
+    width: 100px;
+    height: 55px;
+    margin-top: 28px;
+    border: none;
+    background-color: rgb(237, 237, 237);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 550;
+}
+
+.menuTypeModalContainer>button:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}

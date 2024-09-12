@@ -1,0 +1,194 @@
+import axios from 'axios';
+import './UserListPage.css';
+import { useEffect, useState } from 'react';
+import moment from 'moment';
+
+function UserListPage() {
+
+    const [userList, setUserList] = useState([]);
+
+    const [searchWord, setSearchWord] = useState('');
+    const [isCurrentUse, setIsCurrentUse] = useState('all');
+    const [isBenned, setIsBenned] = useState('all');
+
+
+    // [1. 모든 유저 정보]===================================================================================================
+    useEffect(() => {
+        axios
+            .get(`/user/allUserList`)
+            .then((r) => {
+                // console.log(`유저리스트 성공 : ${r.data}`);
+                setUserList(r.data);
+            }).catch((e) => {
+                alert(`유저리스트 실패`);
+                console.log(`유저리스트 실패 : ${e.message}`);
+            })
+    }, [])
+
+
+    // [2. 검색된 유저 정보]===================================================================================================
+    function searchUserData() {
+        axios
+            .get(`/user/userSearch?searchWord=${searchWord}`)
+            .then((r) => {
+                setUserList(r.data);
+            }).catch((e) => {
+                console.log(`검색실패 : ${e.message}`);
+                alert(`검색어를 입력해주세요.`);
+            })
+    }
+
+
+    // [3-1. 입실 사용자 선택]===================================================================================================
+    function selectByCheckedStatus(e) {
+        axios
+            .get(`/user/selectByCheckedStatus?opt=${e}`)
+            .then((r) => {
+                setUserList(r.data);
+            }).catch((e) => {
+                console.log(`검색실패 : ${e.message}`);
+                alert(`체크인기준 오류.`);
+            })
+    }
+
+    // [3-2. 이용금지 사용자 선택]===================================================================================================
+    function selectByBenned(isBenned) {
+        const isBennedValue = String(isBenned);
+
+        console.log(isBennedValue);
+        axios
+            .get(`/user/selectByBenned?opt=${isBennedValue}`)
+            .then((r) => {
+                setUserList(r.data);
+            }).catch((e) => {
+                console.log(`검색실패 : ${e.message}`);
+                alert(`벤기준 오류.`);
+            })
+    }
+
+    // [4. 금지하기 / 해제]=====================================================================================================
+    function userBen(selectedId, state) {
+        const data = {
+            id: selectedId,
+            benned: state
+        }
+
+        console.log(data);
+
+        axios
+            .post(`/user/ben`, data)
+            .then(() => {
+                alert(`성공`);
+                window.location.reload();
+
+            }).catch((e) => {
+                alert(`금지 실패`);
+            })
+    }
+
+    // [?. 날짜 포맷]===================================================================================================
+    function birthFormatter(date) {
+        return moment(date).format('YY-MM-DD');
+    }
+
+    function phoneFormat(num) {
+        return `${num.slice(0, 3)}-${num.slice(3, 7)}-${num.slice(7)}`
+    }
+
+
+    // console.log(userList);
+
+    //=====================================================================================================================
+    return (
+        <>
+            <div className='UserListPageContainer'>
+                <div className='userListSearchBox'>
+                    <span className='userListSearchTitle'>유저 ID</span>
+                    <input
+                        type="text"
+                        className='userListSearchInputText'
+                        value={searchWord}
+                        onChange={(e) => setSearchWord(e.target.value)}
+                    />
+                    <button className='userListSearchButton' onClick={searchUserData}>검색</button>
+
+                    <select
+                        name="isCurrentUse"
+                        className='userListSelectIsCurrentUse'
+                        value={isCurrentUse}
+                        onChange={(e) => setIsCurrentUse(e.target.value)}
+                    >
+                        <option value="all">모두</option>
+                        <option value="true">입실중</option>
+                        <option value="false">미입실</option>
+                    </select>
+                    <button className='userListSearchButton' onClick={() => selectByCheckedStatus(isCurrentUse)}>검색</button>
+
+                    <select
+                        name="isBenned"
+                        className='userListSelectIsBenned'
+                        value={isBenned}
+                        onChange={(e) => setIsBenned(e.target.value)}
+                    >
+                        <option value="all">모두</option>
+                        <option value="true">이용금지자</option>
+                        <option value="false">일반이용자</option>
+                    </select>
+                    <button className='userListSearchButton' onClick={() => selectByBenned(isBenned)}>검색</button>
+                </div>
+
+                <table className='userListPageTable'>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>이름</th>
+                            <th>생년월일</th>
+                            <th>휴대폰번호</th>
+                            <th>가입일</th>
+                            <th>탈퇴일</th>
+                            <th>금지 여부</th>
+                            <th>금지 적용</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {userList && userList.length > 0 ? (
+                            userList.map((d, i) => (
+                                <tr key={i} className={d.is_benned === '1' ? `userListTbodyTrBenned` : `userListTbodyTr`}>
+                                    <td>{d.id}</td>
+                                    <td>{d.user_name}</td>
+                                    <td>{birthFormatter(d.birth)}</td>
+                                    <td>{phoneFormat(d.phone_number)}</td>
+                                    <td>{d.join_date}</td>
+                                    <td>{d.deactivation_date}</td>
+                                    <td>{d.is_benned === '1' ? '금지' : ''}</td>
+                                    <td>
+                                        {d.is_benned === '1' ?
+                                            <div className='unBenButton'>
+                                                <button onClick={() => userBen(d.id, d.is_benned)}>금지해제</button>
+                                            </div>
+                                            :
+                                            <div className='benButton'>
+                                                <button onClick={() => userBen(d.id, d.is_benned)}>이용금지</button>
+                                            </div>
+                                        }
+                                    </td>
+
+                                </tr>
+                            )))
+                            :
+                            (
+
+                                <tr className='noSearchedUserList'><td colSpan={8}>정보 없음</td></tr>
+                            )
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </>
+    )
+}
+
+export default UserListPage;

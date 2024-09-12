@@ -1,0 +1,48 @@
+.SeatContainer,
+.seatUsed,
+.seatMine,
+.seatFixed {
+    width: 60px;
+    height: 50px;
+    background-color: #dcdcdc;
+    border: 1px solid #ccc;
+    border: 1px solid black;
+    box-sizing: border-box;
+    /* margin: 10px; */
+}
+
+.seatUsed {
+    background-color: rgb(255, 27, 27);
+}
+
+.seatMine {
+    background-color: rgb(0, 177, 0);
+}
+
+.SeatContainer:hover {
+    background-color: #c3c3c3;
+    cursor: pointer;
+}
+
+.seatUsed:hover {
+    cursor: not-allowed;
+}
+
+.seatMine:hover {
+    background-color: rgb(0, 255, 0);
+    cursor: pointer;
+}
+
+/* =================================================================== */
+.seatNum {
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.seatPrseentState>.seatPrseentVacant,
+.seatPrseentState>.seatPrseentOccupied {
+    text-align: center;
+    font-size: 10px;
+    margin-top: 5px;
+}

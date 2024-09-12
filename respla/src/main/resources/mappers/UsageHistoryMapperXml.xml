@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.res.pla.mapper.UsageHistoryMapper">
+
+	<insert id="recordAction" keyProperty="uh_code">
+		<selectKey keyProperty="uh_code" resultType="String"
+			order="BEFORE">
+			select concat(#{id}, '-',substring(date_format(now(), '%Y%m%d-%H%i%s'), 3),
+			'-', #{seat_num} , #{action_type} ) AS uh_code
+		</selectKey>
+
+		insert into usage_history(uh_code, id, seat_num, action_type, upp_code)
+		values(
+		#{uh_code},
+		#{id},
+		#{seat_num},
+		#{action_type},
+		#{upp_code}
+		);
+	</insert>
+
+
+	<select id="selectAllHistory"
+		resultType="com.res.pla.domain.UsageHistoryDTO">
+		SELECT * FROM usage_history
+	</select>
+
+	<select id="selectAllHistoryById"
+		resultType="com.res.pla.domain.UsageHistoryDTO">
+		SELECT uh.uh_code, uh.id, uh.used_date_time, uh.seat_num, uh.action_type, uh.upp_code,
+		upp.p_type, upp.time_value, upp.day_value
+		FROM usage_history uh
+		LEFT JOIN user_purchased_product upp ON uh.upp_code = upp.upp_code
+		WHERE uh.id = #{id}
+		order by used_date_time
+	</select>
+
+	<select id="selectAllHistoryByIdActionType"
+		resultType="com.res.pla.domain.UsageHistoryDTO">
+		SELECT * FROM usage_history where id = #{id} and action = #{t}
+	</select>
+
+	<update id="clean">
+		truncate table usage_history
+	</update>
+
+</mapper>
+	

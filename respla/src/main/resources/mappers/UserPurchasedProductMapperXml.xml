@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.res.pla.mapper.UserPurchasedProductMapper">
+  
+ 	<select id="selectAllUsableUppsById" resultType="com.res.pla.domain.UserPurchasedProductDTO" >  <!-- ID기준 사용가능한 모든 상품 -->
+	        SELECT * FROM user_purchased_product WHERE id = #{id} and usable = true
+	        order by purchase_date
+	</select>
+	
+	 <select id="selectAllUsableUppsByIdPType" resultType="com.res.pla.domain.UserPurchasedProductDTO">         <!-- ID기준 모든 구매 상품 -->
+	        SELECT * FROM user_purchased_product where id = #{id}
+	        order by purchase_date
+    </select>
+        		    		
+    <select id="selectAllUppsById" resultType="com.res.pla.domain.UserPurchasedProductDTO">         <!-- ID기준 모든 구매 상품 -->
+	        SELECT * FROM user_purchased_product where id = #{id}
+	        order by purchase_date
+    </select>
+   
+    <select id="selectAfterStartDateUppsById" resultType="com.res.pla.domain.UserPurchasedProductDTO">         <!-- ID,날짜 기준 모든 구매 상품 -->
+	        SELECT * FROM user_purchased_product where id = #{id} and start_date >= #{start_date} and refunded = false
+    </select>
+    
+    <select id="selectUppsByEndDateAfterCurrentDate" resultType="com.res.pla.domain.UserPurchasedProductDTO">         <!-- ID,날짜 기준 모든 구매 상품 -->
+	        SELECT * FROM user_purchased_product where id = #{id} and end_date >= #{currentDateTime} and refunded = false
+    </select>
+    
+    
+	<!-- =======================================================  -->
+    <select id="selectExtendUppAfterStartDate" resultType="com.res.pla.domain.UserPurchasedProductDTO">         <!-- ID,날짜 기준 연장 구매 상품 1개 -->
+	        SELECT * FROM user_purchased_product
+	        where id = #{id} and start_date >= #{caledUppStartDate} and order_type = 'extend' and refunded = false
+	        order by purchase_date desc limit 1 
+    </select>
+    
+     <select id="selectUppByUppcode" resultType="com.res.pla.domain.UserPurchasedProductDTO" >      <!-- uppcode 기준 상품 1개 -->
+	        SELECT * FROM user_purchased_product WHERE upp_code = #{upp_code}
+    </select>
+    
+    <select id="selectInUsedTrueUpp" resultType="com.res.pla.domain.UserPurchasedProductDTO">
+    		SELECT * FROM user_purchased_product WHERE id = #{id} AND in_used = true
+	</select>
+	
+    <select id="selectCalculatedTrueUpp" resultType="com.res.pla.domain.UserPurchasedProductDTO">
+    		SELECT * FROM user_purchased_product WHERE id = #{id} AND calculated = true
+    		order by purchase_date desc limit 1
+	</select>
+	
+	 <select id="selectUsableOneUppByIdPType" resultType="com.res.pla.domain.UserPurchasedProductDTO">
+    		SELECT * FROM user_purchased_product WHERE id = #{id} and usable = true
+    		<choose>
+        		<when test='p_type == "m"'>
+            		and p_type = #{p_type} order by purchase_date limit 1
+        		</when>
+        		<when test='p_type == "d"'>
+            		and p_type = #{p_type}
+        		</when>
+        		<when test='p_type == "f"'>
+            		and p_type = #{p_type}
+        		</when>
+        		<when test='p_type == "df"'>
+            		and (p_type = 'd' or p_type = 'f')
+        		</when>
+        		<otherwise>
+            		<bind name="errorMessage" value="'Invalid p_type ' + p_type" />
+            		THROW EXCEPTION ${errorMessage}
+        		</otherwise>
+    		</choose>
+	</select>
+    
+    
+    <!-- =======================================================  -->
+    <update id="convertInUsed">
+	        update user_purchased_product set in_used = #{in_used} where id = #{id} and upp_code = #{upp_code}
+    </update>
+    
+    <update id="convertCalculated">
+	        update user_purchased_product set calculated = #{calculated} where id = #{id} and upp_code = #{upp_code}
+    </update>
+    
+    <update id="convertUsable">
+	        update user_purchased_product set usable = #{usable} where id = #{id} and upp_code = #{upp_code}
+    </update>
+    
+    <update id="realTimeCalculateUppTimePass">
+	        update user_purchased_product 
+	        set used_time = used_time + #{minute} , available_time = available_time - #{minute}
+	        where id = #{id} and upp_code = #{upp_code}
+    </update>
+    
+     <update id="clean" >
+        truncate table user_purchased_product
+    </update>
+    
+    
+	<select id="selectAllUpps" resultType="com.res.pla.domain.UserPurchasedProductDTO">
+	        SELECT * FROM user_purchased_product
+	</select>
+	
+  
+  </mapper>

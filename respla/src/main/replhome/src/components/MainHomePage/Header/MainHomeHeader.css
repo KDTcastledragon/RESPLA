@@ -1,0 +1,36 @@
+.MainHomeHeaderContainer {
+    box-sizing: content-box;
+    /* background-color: rgb(241, 250, 255); */
+    /* background-color: rgb(128, 0, 248); */
+    width: 1450px;
+    height: 100px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    align-items: end;
+    padding-bottom: 30px;
+    /* margin-bottom: -30px; */
+}
+
+.mainHomeHeaderLogoTitle {
+    width: 550px;
+    height: 78px;
+    margin-left: 60px;
+}
+
+.mainHomeHeaderLogoTitle>a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 50px;
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+    transition: transform 0.5s ease;
+    /* background-color: aqua; */
+}
+
+.mainHomeHeaderLogoTitle>a:hover {
+    transform: scale(1.2);
+}

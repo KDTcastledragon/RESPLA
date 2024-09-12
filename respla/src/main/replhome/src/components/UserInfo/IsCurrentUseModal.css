@@ -1,0 +1,86 @@
+.IsCurrentUseModalContainer {
+    box-sizing: border-box;
+    position: absolute;
+    width: 430px;
+    height: 500px;
+    z-index: 300;
+    left: 550px;
+    top: 20px;
+    background-color: white;
+    background-color: rgb(227, 225, 255);
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.isCurrentUseMOdalCommentBox {
+    width: 390px;
+    height: 200px;
+    margin-top: 80px;
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+}
+
+.isCurrentUseMOdalCommentBox>span:nth-child(1),
+.isCurrentUseMOdalCommentBox>span:nth-child(2),
+.isCurrentUseMOdalCommentBox>span:nth-child(3) {
+    display: inline-block;
+    font-size: 25px;
+    font-weight: 550;
+    margin-top: 20px;
+}
+
+.isCurrentUseButtonBox {
+    width: 380px;
+    height: 55px;
+    /* background-color: blueviolet; */
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.isCurrentUseButtonBox>button {
+    width: 140px;
+    height: 100%;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+}
+
+.isCurrentUseButtonBox>button:nth-child(1) {
+    background-color: rgb(109, 98, 255);
+    color: white;
+}
+
+
+.isCurrentUseButtonBox>button:nth-child(2) {
+    background-color: white;
+}
+
+.isCurrentUseButtonBox>button:nth-child(1):hover {
+    background-color: rgb(75, 67, 177);
+    cursor: pointer;
+}
+
+.isCurrentUseButtonBox>button:nth-child(2):hover {
+    background-color: rgb(226, 226, 226);
+    cursor: pointer;
+}
+
+.isCurrentUseModalCloseTimeComment {
+    width: 80%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-top: 90px;
+    font-size: 14px;
+    /* background-color: aqua; */
+}
+
+.isCurrentUseModalCloseTimeComment>span:nth-child(1) {
+    font-weight: bold;
+}

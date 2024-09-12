@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.res.pla.mapper.SeatMapper">
+
+	<select id="presentAllSeats" resultType="com.res.pla.domain.SeatDTO">
+        select * from seats
+    </select>
+    
+    <select id="selectSeat" resultType="com.res.pla.domain.SeatDTO" >
+        select * from seats where seat_num = #{seat_num}
+    </select>
+    
+    <select id="selectSeatById" resultType="com.res.pla.domain.SeatDTO" >
+        select * from seats where id = #{id}
+    </select>
+    
+    <select id="selectSeatBySearchWord" resultType="com.res.pla.domain.SeatDTO" >
+        SELECT s.* FROM seats s
+        join user u on s.id = u.id where id = #{word}
+        	OR user_name ={word} 
+        	OR phone_number ={phone_number}
+    </select>
+    
+    <select id="occupiedSeatById" resultType="boolean" >
+        select count(*) > 0 from seats where id = #{id} and occupied = true
+    </select>
+    
+    <update id="occupySeat" >
+        update seats set occupied = true, id = #{id} , upp_code = #{upp_code} where seat_num = #{seat_num}
+    </update>
+    
+    <update id="vacateSeat" >
+        update seats set occupied = false, id = null , upp_code = null where seat_num = #{usedSeatNum}
+    </update>
+    
+    <update id="convertOccupied">
+    	update seats set occupied = #{status} 
+    	where seat_num = #{fixedSeatNum} and id = #{id} and upp_code = #{usedUppCode}
+    </update>
+    
+    <update id="clean" >
+        UPDATE seats SET occupied = false, id = null , upp_code = null
+    </update>
+    
+    
+</mapper>

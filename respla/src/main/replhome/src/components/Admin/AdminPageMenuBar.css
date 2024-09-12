@@ -1,0 +1,43 @@
+.AdminPageMenuBarContainer {
+    background-color: rgb(233, 233, 233);
+    width: 140px;
+    height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.AdminPageMenuBarTitle {
+    display: inline-block;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    background-color: rgb(171, 171, 171);
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid gray;
+}
+
+.AdminPageMenuBarContainer>div {
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+    margin: 0;
+    text-align: center;
+    border-bottom: 1px solid gray;
+}
+
+.AdminPageMenuBarContainer>div>a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+    font-weight: 550;
+}
+
+.selectedAdminMenu {
+    background-color: white;
+}
