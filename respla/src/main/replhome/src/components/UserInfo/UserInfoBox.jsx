@@ -12,8 +12,6 @@ function UserInfoBox(props) {
 
     const [uData, setUData] = useState([]);         // 로그인한 유저 정보 (userInfoBox로 전달)
 
-    const [history, setHistory] = useState(false);
-
     //==[ 1. 유저 정보 박스. 첫 렌더링시에 자동 실행]====================================================================================
     useEffect(() => {
         const loginedUserId = { id: loginID }
@@ -30,7 +28,7 @@ function UserInfoBox(props) {
                 console.log(`HomeBody_loginedUser 실패 : `, e.message);
             })
 
-    }, [])
+    }, []);
 
 
     //==[ 2. 로그아웃 실행 ]============================================================================================================

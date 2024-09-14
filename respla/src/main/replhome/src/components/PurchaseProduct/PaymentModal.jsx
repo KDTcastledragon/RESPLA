@@ -177,9 +177,15 @@ function PaymentModal({ product_code, p_type, time_value, day_value, price, star
                                                 <span>일</span>
                                             </td>
 
-                                            <td>{formatDate(start_date)}</td>
+                                            <td>
+                                                <span className={order_type === 'extend' ? 'extendStartDate' : null}>{formatDate(start_date)}</span>
+                                            </td>
+
                                             <td>~</td>
-                                            <td>{formatDate(end_date)}</td>
+
+                                            <td>
+                                                <span className={order_type === 'extend' ? 'extendEndDate' : 'extendNormal'}>{formatDate(end_date)}</span>
+                                            </td>
 
                                             <td className='paymentModalPrice' style={{ width: '15%' }}>
                                                 <span>{price !== null ? price.toLocaleString() : 'error'}</span>

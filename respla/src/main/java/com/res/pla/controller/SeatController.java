@@ -57,12 +57,13 @@ public class SeatController {
 			log.info("");
 			String id = menuData.get("id");
 			String menu = menuData.get("menu");
-
+			log.info("11");
 			UserPurchasedProductDTO fixedPass = uppservice.selectUsableOneUppByIdPType(id, "f");
+			log.info("22");
 			boolean isUserCheckedIn = seatfacade.isUserCheckedIn(id); // 입실 여부 확인
-			log.info("고정석 자리이동 불가.");
+			log.info("33");
 			if (fixedPass != null && menu.equals("moveseat")) {
-
+				log.info("고정석 자리이동 불가.");
 				return ResponseEntity.status(HttpStatus.FORBIDDEN).body("fixed not allow moveseat");
 			}
 

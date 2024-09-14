@@ -35,6 +35,7 @@
     width: 100%;
     height: 100%;
     font-size: 50px;
+    font-weight: bold;
     background-color: rgb(67, 225, 130);
     border-radius: 22px;
     transition: transform 0.5s ease;

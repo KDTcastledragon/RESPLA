@@ -68,8 +68,8 @@ function UsageHistory({ setOpenUsageHistory, loginID }) {
                                             : d.action_type === 'autoIn' ? '자동재입실'
                                                 : d.action_type === 'autoOutExpiry' ? '자동퇴실(기간만료)'
                                                     : d.action_type === 'autoOutSuspend' ? '자동퇴실(기간권 우선사용)'
-                                                        : d.action_type === 'autoOutDaily' ? '자동퇴실(05시 전체퇴실)'
-                                                            : d.action_type === 'autoForce' ? '강제퇴실(규칙위반)'
+                                                        : d.action_type === 'autoOutDaily' ? '자동퇴실(05시 정기퇴실)'
+                                                            : d.action_type === 'autoOutForce' ? '강제퇴실(규칙위반)'
                                                                 : 'ERROR'}</td>
                             </tr>
                         ))}
