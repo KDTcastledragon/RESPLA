@@ -94,7 +94,7 @@ function PaymentModal({ product_code, p_type, time_value, day_value, price, star
                                 break;
                         }
                     } else {
-                        console.log(`else-error : ${error.messege}`)
+                        console.log(`else-error : ${error.messege}`);
                         alert(`서버오류`);
                     }
                 });
