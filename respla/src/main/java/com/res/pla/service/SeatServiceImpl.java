@@ -45,13 +45,15 @@ public class SeatServiceImpl implements SeatService {
 
 	@Override
 	public SeatDTO selectSeatBySearchWord(String word) {
-		UserDTO user = usermapper.selectBySearchWordOnlyOne(word);
+		log.info(word);
+		UserDTO user = usermapper.selectBySearchWordCorrectlyOne(word);
+		log.info("user : {}", user);
 
 		if (user != null) {
 			return seatmapper.selectSeatById(user.getId());
-		} else {
-			int seatNum = Integer.parseInt(word);
 
+		} else if (isNumeric(word)) {
+			int seatNum = Integer.parseInt(word);
 			SeatDTO seat = seatmapper.selectSeat(seatNum);
 
 			if (seat != null) {
@@ -60,6 +62,8 @@ public class SeatServiceImpl implements SeatService {
 			} else {
 				return null;
 			}
+		} else {
+			return null;
 		}
 	}
 
@@ -97,6 +101,11 @@ public class SeatServiceImpl implements SeatService {
 
 		log.info("");
 		return isShift;
+	}
+
+	//	===[숫자 판별기]=======================================================
+	public boolean isNumeric(String word) {
+		return word.matches("-?\\d+(\\.\\d+)?");
 	}
 
 }

@@ -14,9 +14,9 @@ function SeatUnit(props) {
     //==================================================================================================================================
     return (
         <div>
-            <div className={props.occupied === false ? 'SeatContainer' : 'seatUsed'} onClick={seatClick}>
+            <div className={props.occupied === false ? 'SeatAdminContainer' : 'seatAdminUsed'} onClick={seatClick}>
 
-                <div>
+                <div className='seatNum'>
                     <span>{props.seat_num}</span>
                 </div>
 
@@ -26,8 +26,7 @@ function SeatUnit(props) {
                     </>
                     :
                     <>
-                        <div>ID : {props.id}</div>
-                        {/* <div>upp : {props.upp_code}</div> */}
+                        <div className='seatAdminUserId'><span>{props.id}</span></div>
                     </>
                 }
             </div>

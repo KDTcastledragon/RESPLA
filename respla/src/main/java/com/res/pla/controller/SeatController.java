@@ -280,7 +280,12 @@ public class SeatController {
 		log.info("word : {}", word);
 		SeatDTO searchedSeat = seatservice.selectSeatBySearchWord(word);
 
-		return ResponseEntity.ok().body(searchedSeat);
+		if (searchedSeat != null) {
+			return ResponseEntity.ok().body(searchedSeat);
+
+		} else {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("no content");
+		}
 
 	}
 }

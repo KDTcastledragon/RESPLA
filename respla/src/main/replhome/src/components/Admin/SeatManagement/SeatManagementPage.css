@@ -1,23 +1,21 @@
 .SeatManagementPageContainer {
     margin: 0 auto;
     width: 1200px;
-    height: 560px;
+    height: 520px;
     background-color: rgb(255, 249, 236);
-    overflow-y: scroll;
+    background-color: rgb(239, 1, 1);
     border: 1px solid black;
-    position: relative;
+    /* position: relative; */
 }
 
-.seatPresent {
-    position: relative;
-}
-
+/* ========================= */
 .seatSearchButton {
     width: 150px;
-    height: 50px;
+    height: 70px;
     position: sticky;
-    margin: 0;
-    top: 0;
+    margin-top: 0px;
+    margin-left: 170px;
+    top: 50px;
     z-index: 3;
 }
 
@@ -34,4 +32,148 @@
     background-color: rgb(114, 63, 0);
     color: white;
     cursor: pointer;
+}
+
+
+/* ========================================== */
+.seatRoom1 {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    overflow-y: scroll;
+    background-color: rgb(255, 253, 248);
+}
+
+
+.topCenter,
+.leftSide,
+.rightSide,
+.bottomCenter,
+.centerSection1,
+.centerSection2,
+.enteranceDoor,
+.verticalWall,
+.horizontalWall1,
+.horizontalWall2,
+.horizontalWall3 {
+    position: absolute;
+    box-sizing: border-box;
+    border: none;
+}
+
+.enteranceDoor {
+    top: 0;
+    left: 9%;
+    width: 70px;
+    height: 40px;
+    line-height: 40px;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.topCenter {
+    top: 0;
+    left: 50%;
+    margin-left: -24%;
+    width: 690px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    /* transform: translateX(-50%);
+    이걸쓰면 modal창도 같이 영향을 받아서 사용불가 */
+    /* background-color: red; */
+}
+
+.leftSide {
+    top: 120px;
+    left: 0;
+    width: 60px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    /* background-color: blue; */
+}
+
+.rightSide {
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 750px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* background-color: blue; */
+}
+
+.bottomCenter {
+    top: 701px;
+    left: 160px;
+    width: 840px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    background-color: blueviolet;
+}
+
+.centerSection1,
+.centerSection2 {
+    width: 220px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    /* background-color: rgb(152, 168, 228); */
+}
+
+.centerSection1 {
+    top: 150px;
+    left: 660px;
+    margin-left: -34%;
+    /* transform: translateX(-50%);
+    이걸쓰면 modal창도 같이 영향을 받아서 사용불가 */
+}
+
+.centerSection2 {
+    top: 150px;
+    left: 1100px;
+    margin-left: -34%;
+}
+
+.centerSectionSeats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px;
+    row-gap: 30px;
+    margin-top: 30px;
+}
+
+.verticalWall {
+    width: 30px;
+    height: 100%;
+}
+
+.horizontalWall1 {
+    top: 90px;
+    width: 100%;
+    height: 30px;
+}
+
+.horizontalWall2 {
+    top: 210px;
+    width: 100%;
+    height: 30px;
+}
+
+.horizontalWall3 {
+    top: 330px;
+    width: 100%;
+    height: 30px;
+}
+
+.verticalWall,
+.horizontalWall1,
+.horizontalWall2,
+.horizontalWall3 {
+    background-color: rgb(47, 47, 47);
+    color: rgb(148, 101, 73);
 }

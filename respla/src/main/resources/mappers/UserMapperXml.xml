@@ -14,15 +14,13 @@
     </select>
     
     <select id="selectBySearchWord" resultType="com.res.pla.domain.UserDTO">
-        SELECT * FROM user where id like concat('%',#{searchWord},'%') 
+        SELECT * FROM user where id like concat('%',#{searchWord},'%')
         	OR user_name LIKE CONCAT('%', #{searchWord}, '%')
         	OR phone_number LIKE CONCAT('%', #{searchWord}, '%')
     </select>
     
-    <select id="selectBySearchWordOnlyOne" resultType="com.res.pla.domain.UserDTO">
+    <select id="selectBySearchWordCorrectlyOne" resultType="com.res.pla.domain.UserDTO">
         SELECT * FROM user where id = #{word}
-        	OR user_name = #{word}
-        	OR phone_number = #{word}
     </select>
     
     <select id="selectByBenned" resultType="com.res.pla.domain.UserDTO">

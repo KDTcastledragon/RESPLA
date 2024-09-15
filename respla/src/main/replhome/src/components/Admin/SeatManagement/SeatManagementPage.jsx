@@ -38,71 +38,126 @@ function SeatManagementPage() {
     }
 
     console.log(sessionStorage.getItem('seat'));
-
     //===============================================================================================================================
     return (
-        <div className='SeatManagementPageContainer'>
-            <div className='seatPresent'>
-                <div className='seatSearchButton'><button onClick={() => searchSeat()}>좌석 검색</button></div>
+        <>
+            <div className='SeatManagementPageContainer'>
+                <div className='seatRoom1'>
 
-                <div className='topCenter2'>
-                    {seatsData.slice(0, 10).map((d, i) => (
-                        <SeatUnit
-                            key={i}
-                            seat_num={d.seat_num}
-                            occupied={d.occupied}
-                            id={d.id}
-                            upp_code={d.upp_code}
-                        />
-                    ))}
+                    <div className='enteranceDoor'>출입문</div>
+                    <div className='topCenter'>
+                        {seatsData.slice(0, 10).map((d, i) => (
+                            <SeatUnit
+                                key={i}
+                                seat_num={d.seat_num}
+                                occupied={d.occupied}
+                                id={d.id}
+                                // menuType={menuType}
+                                upp_code={d.upp_code}
+                                setSeatUnitControlModalOpen={setSeatUnitControlModalOpen}
+                            />
+                        ))}
+                    </div>
+
+                    <div className='leftSide'>
+                        {seatsData.slice(10, 22).map((d, i) => (
+                            <SeatUnit
+                                key={i + 10}
+                                seat_num={d.seat_num}
+                                occupied={d.occupied}
+                                id={d.id}
+                                // menuType={menuType}
+                                upp_code={d.upp_code}
+                                setSeatUnitControlModalOpen={setSeatUnitControlModalOpen}
+                            />
+                        ))}
+                    </div>
+
+                    <div className='rightSide'>
+                        {seatsData.slice(22, 37).map((d, i) => (
+                            <SeatUnit
+                                key={i + 22}
+                                seat_num={d.seat_num}
+                                occupied={d.occupied}
+                                id={d.id}
+                                // menuType={menuType}
+                                upp_code={d.upp_code}
+                                setSeatUnitControlModalOpen={setSeatUnitControlModalOpen}
+                            />
+                        ))}
+                    </div>
+
+                    <div className='centerSection1'>
+                        <div className='verticalWall'></div>
+                        <div className='horizontalWall1'></div>
+                        <div className='horizontalWall2'></div>
+                        <div className='horizontalWall3'></div>
+
+                        <div className='centerSectionSeats'>
+                            {seatsData.slice(37, 45).map((d, i) => (
+                                <SeatUnit
+                                    key={i + 37}
+                                    seat_num={d.seat_num}
+                                    occupied={d.occupied}
+                                    id={d.id}
+                                    // menuType={menuType}
+                                    upp_code={d.upp_code}
+                                    setSeatUnitControlModalOpen={setSeatUnitControlModalOpen}
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className='centerSection2'>
+                        <div className='verticalWall'></div>
+                        <div className='horizontalWall1'></div>
+                        <div className='horizontalWall2'></div>
+                        <div className='horizontalWall3'></div>
+
+                        <div className='centerSectionSeats'>
+                            {seatsData.slice(45, 53).map((d, i) => (
+                                <SeatUnit
+                                    key={i + 45}
+                                    seat_num={d.seat_num}
+                                    occupied={d.occupied}
+                                    id={d.id}
+                                    // menuType={menuType}
+                                    upp_code={d.upp_code}
+                                    setSeatUnitControlModalOpen={setSeatUnitControlModalOpen}
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className='bottomCenter'>
+                        {seatsData.slice(53, 67).map((d, i) => (
+                            <SeatUnit
+                                key={i + 53}
+                                seat_num={d.seat_num}
+                                occupied={d.occupied}
+                                id={d.id}
+                                // menuType={menuType}
+                                upp_code={d.upp_code}
+                                setSeatUnitControlModalOpen={setSeatUnitControlModalOpen}
+                            />
+                        ))}
+                    </div>
+
+
+
                 </div>
 
-                <div className='leftSide2'>
-                    {seatsData.slice(10, 30).map((d, i) => (
-                        <SeatUnit
-                            key={i + 8}
-                            seat_num={d.seat_num}
-                            occupied={d.occupied}
-                            id={d.id}
-                            upp_code={d.upp_code}
-                        />
-                    ))}
-                </div>
-
-                <div className='rightSide2'>
-                    {seatsData.slice(30, 50).map((d, i) => (
-                        <SeatUnit
-                            key={i + 22}
-                            seat_num={d.seat_num}
-                            occupied={d.occupied}
-                            id={d.id}
-                            upp_code={d.upp_code}
-                        />
-                    ))}
-                </div>
-
-                <div className='centerSection2'>
-                    {seatsData.slice(36).map((d, i) => (
-                        <SeatUnit
-                            key={i + 36}
-                            seat_num={d.seat_num}
-                            occupied={d.occupied}
-                            id={d.id}
-                            upp_code={d.upp_code}
-                        />
-                    ))}
-                </div>
+                {seatUnitControlModalOpen &&
+                    <SeatUnitControlModal
+                        seatUnitControlModalOpen={seatUnitControlModalOpen}
+                        setSeatUnitControlModalOpen={setSeatUnitControlModalOpen}
+                    />
+                }
 
             </div>
-
-            {seatUnitControlModalOpen &&
-                <SeatUnitControlModal
-                    seatUnitControlModalOpen={seatUnitControlModalOpen}
-                    setSeatUnitControlModalOpen={setSeatUnitControlModalOpen}
-                />
-            }
-
-        </div>
+            <div className='seatSearchButton'><button onClick={() => searchSeat()}>좌석 검색</button></div>
+            <div className='fixedSeatMoveButton'><button onClick={() => searchSeat()}>좌석 검색</button></div>
+        </>
     )
 }
 

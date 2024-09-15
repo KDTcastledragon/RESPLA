@@ -13,7 +13,7 @@ public interface UserMapper {
 
 	List<UserDTO> selectAllUsers();
 
-	UserDTO selectBySearchWordOnlyOne(String word);
+	UserDTO selectBySearchWordCorrectlyOne(String word);
 
 	int matchId(String id);
 

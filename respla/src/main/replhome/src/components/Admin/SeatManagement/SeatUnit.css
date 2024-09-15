@@ -1,17 +1,55 @@
-.SeatAdminContainer {
+/* .SeatAdminContainer {
     font-size: 14px;
     width: 100px;
     height: 60px;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     margin: 10px;
+} */
+
+.SeatAdminContainer,
+.seatAdminUsed {
+    width: 60px;
+    height: 50px;
+    background-color: #dcdcdc;
+    border: 1px solid #ccc;
+    border: 1px solid black;
+    box-sizing: border-box;
 }
 
 .seatAdminUsed {
-    font-size: 10px;
-    width: 100px;
-    height: 60px;
     background-color: red;
-    border: 1px solid #ccc;
-    margin: 10px;
+}
+
+.SeatContainer,
+.seatUsed {}
+
+.seatUsed {
+    background-color: rgb(255, 27, 27);
+}
+
+.SeatAdminContainer:hover {
+    background-color: #c3c3c3;
+    /* cursor: grabbing; */
+}
+
+.seatAdminUsed {
+    cursor: pointer;
+}
+
+/* =================================================================== */
+.seatNum {
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.seatAdminUserId {
+    font-size: 12px;
+    overflow: hidden;
+    /* 넘치는 부분 숨기기 */
+    white-space: nowrap;
+    /* 텍스트 줄 바꿈 방지 */
+    text-overflow: ellipsis;
+    /* 넘칠 때 ...으로 표시 */
 }

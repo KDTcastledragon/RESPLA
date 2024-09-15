@@ -57,11 +57,13 @@ function SeatUnitControlModal(props) {
         axios
             .get(`/seat/selectBySearchWord?searchWord=${searchWord}`)
             .then((r) => {
-                setSeatData(r.data);
-                console.log(r.data);
-                // alert(`성공`);
+                if (r.status === 200) {
+                    setSeatData(r.data);
+                } else if (r.status === 204) {
+                    alert(`해당 검색어와 일치하는 데이터 존재하지 않음.`);
+                }
             }).catch((e) => {
-                alert(`실패`);
+                alert(`검색 오류`);
             })
     }
 
