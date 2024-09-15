@@ -3,6 +3,7 @@ package com.res.pla.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.res.pla.domain.DateConflictDTO;
 import com.res.pla.domain.UserPurchasedProductDTO;
 
 public interface UserPurchasedProductService {
@@ -28,7 +29,7 @@ public interface UserPurchasedProductService {
 
 	boolean convertUsable(String id, String upp_code, boolean usable);
 
-	boolean isDateConflict(String id, LocalDateTime start_date, LocalDateTime end_date);
+	DateConflictDTO isDateConflict(String id, LocalDateTime start_date, LocalDateTime end_date);
 
 	//==[시간 계산 관련]====================================================================
 

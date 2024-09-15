@@ -3,6 +3,7 @@ import './PurchaseItem.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 import SuccessModal from './SuccessModal';
 import PaymentModal from './PaymentModal';
@@ -16,13 +17,22 @@ function PurchaseItem({ product_code, time_value, day_value, price, sell_count }
 
 
 
-    const [successModalOpen, setSuccessModalOpen] = useState(false); // 구매성공시 나오는 Modal
     const [closeTime, setCloseTime] = useState(20);          // Modal 자동종료 시간
-    const [paymentModalOpen, setPaymentModalOpen] = useState(false);
     const [orderType, setOrderType] = useState();
+    const [successModalOpen, setSuccessModalOpen] = useState(false); // 구매성공시 나오는 Modal
+    const [paymentModalOpen, setPaymentModalOpen] = useState(false); // 결제 Modal
+    const [dateConflict, setDateConflict] = useState(false);
+    const [conflictStartDate, setConflictStartDate] = useState();
+    const [conflictEndDate, setConflictEndDate] = useState();
+    const [conflictPType, setConflictPType] = useState();
+    const [conflictDayValue, setConflictDayValue] = useState();
 
     const [extStartDate, setExtStartDate] = useState();
     const [extEndDate, setExtEndDate] = useState();
+
+    function formatDate(dateString) {
+        return moment(dateString).format('YYYY-MM-DD # HH:mm:ss');
+    }
 
     //==[0. 초기 시간 설정]====================================================================================
     const now = new Date();
@@ -144,7 +154,13 @@ function PurchaseItem({ product_code, time_value, day_value, price, sell_count }
 
                         case 409:
                             console.log(`기간 충돌. 다른 날짜 선택`);
-                            alert(`사용중 / 사용예정 상품의 사용기간과 중복됩니다. \n다른 날짜를 선택해주세요.`);
+                            // alert(`사용중 / 사용예정 상품의 사용기간과 중복됩니다. \n다른 날짜를 선택해주세요.`);
+                            console.log(error.response.data);
+                            setConflictStartDate(error.response.data.startDateTime);
+                            setConflictEndDate(error.response.data.endDateTime);
+                            setConflictPType(error.response.data.p_type);
+                            setConflictDayValue(error.response.data.day_value);
+                            setDateConflict(true);
                             break;
 
                         default:
@@ -275,6 +291,36 @@ function PurchaseItem({ product_code, time_value, day_value, price, sell_count }
                     setSuccessModalOpen={setSuccessModalOpen}
                     closeTime={closeTime}
                 />
+            )}
+
+
+            {dateConflict === true && conflictStartDate !== null && conflictEndDate !== null && (
+                <div className='ConflictModalContainerBackGround'>
+                    <div className='ConflictModalContainer'>
+                        <div className='conflictTitle'><span>날짜 충돌</span></div>
+                        <div className='conflictSubTitle'>
+                            <span>사용중 / 사용예정인 상품이 존재합니다.</span>
+                            <span>&nbsp;&nbsp;다른 날짜를 선택해주세요.</span>
+                        </div>
+                        <div className='conflictData'>
+                            <span>{conflictPType === 'd' ? '기간권' : conflictPType === 'f' ? '고정석' : '오류'}</span>
+                            <span>&nbsp;</span>
+                            <span>{`[`}</span>
+                            <span>{conflictDayValue}</span>
+                            <span>일</span>
+                            <span>{`]`}</span>
+                            <span>&nbsp;&nbsp;&nbsp;</span>
+                            <span> : </span>
+                            <span>&nbsp;&nbsp;&nbsp;</span>
+                            <span>{formatDate(conflictStartDate)}</span>
+                            <span>&nbsp; ~ &nbsp;</span>
+                            <span>{formatDate(conflictEndDate)}</span>
+                        </div>
+                        <div className='conflictModalClose'>
+                            <button onClick={() => setDateConflict(false)}>닫기</button>
+                        </div>
+                    </div>
+                </div>
             )}
 
         </div>

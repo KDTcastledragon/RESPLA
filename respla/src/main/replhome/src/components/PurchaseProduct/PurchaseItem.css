@@ -160,3 +160,92 @@
     height: 100px;
     background-color: aqua;
 }
+
+/* ====[날짜충돌 ConflictModalContainer]===================== */
+.ConflictModalContainerBackGround {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(84, 84, 84, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.ConflictModalContainer {
+    position: fixed;
+    width: 900px;
+    height: 350px;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.conflictTitle {
+    width: 90%;
+    height: 50px;
+    line-height: 50px;
+    /* background-color: aqua; */
+    margin-top: 10px;
+}
+
+.conflictTitle>span {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.conflictSubTitle {
+    width: 90%;
+    height: 20px;
+    line-height: 20px;
+    margin-top: 20px;
+}
+
+.conflictData {
+    width: 95%;
+    height: 100px;
+    line-height: 100px;
+    margin-top: 30px;
+}
+
+.conflictData>span:nth-child(-n+9) {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.conflictData>span:nth-child(10),
+.conflictData>span:nth-child(12) {
+    color: red;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.conflictData>span:nth-child(11) {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.conflictModalClose {
+    width: 200px;
+    height: 50px;
+    margin-top: 40px;
+}
+
+.conflictModalClose>button {
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    background-color: black;
+    color: white;
+}
+
+.conflictModalClose>button:hover {
+    background-color: gray;
+    cursor: pointer;
+}

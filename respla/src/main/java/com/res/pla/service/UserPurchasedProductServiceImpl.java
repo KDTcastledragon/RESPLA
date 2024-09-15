@@ -14,6 +14,7 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Service;
 
+import com.res.pla.domain.DateConflictDTO;
 import com.res.pla.domain.UserPurchasedProductDTO;
 import com.res.pla.mapper.SeatMapper;
 import com.res.pla.mapper.UsageHistoryMapper;
@@ -105,7 +106,7 @@ public class UserPurchasedProductServiceImpl implements UserPurchasedProductServ
 	}
 
 	@Override
-	public boolean isDateConflict(String id, LocalDateTime start_date, LocalDateTime end_date) {
+	public DateConflictDTO isDateConflict(String id, LocalDateTime start_date, LocalDateTime end_date) {
 		log.info("");
 		LocalDateTime currentDateTime = LocalDateTime.now();        // 현재 시간. 
 		List<UserPurchasedProductDTO> uppList = selectUppsByEndDateAfterCurrentDate(id, currentDateTime);           // 지정시작날짜보다 후일인 상품목록들(전체를 불러오면 너무 많다.)
@@ -114,12 +115,14 @@ public class UserPurchasedProductServiceImpl implements UserPurchasedProductServ
 			log.info("기간권/고정석 상품 존재하지 않음. 상품 구매 가능. ");
 			log.info("");
 
-			return false;
+			return new DateConflictDTO(false, null, 0, null, null);
 
 		} else {
 			log.info("기간권/고정석 상품 존재함. for 실행 ");
 
 			for (UserPurchasedProductDTO upp : uppList) {
+				String p_type = upp.getP_type();
+				int day_value = upp.getDay_value();
 				LocalDateTime uppStartDateTime = upp.getStart_date();
 				LocalDateTime uppEndDateTime = upp.getEnd_date();
 
@@ -128,14 +131,14 @@ public class UserPurchasedProductServiceImpl implements UserPurchasedProductServ
 					log.info("구매상품 : {}  ~~~  {} ", Fdate.form2(start_date), Fdate.form2(end_date));
 					log.info("");
 
-					return true;
+					return new DateConflictDTO(true, p_type, day_value, uppStartDateTime, uppEndDateTime);
 				}
 			} // for
 
 			log.info("기간 충돌 검사 결과 : 충돌 없음.");
 			log.info("");
 
-			return false;
+			return new DateConflictDTO(false, null, 0, null, null);
 		}
 	}
 

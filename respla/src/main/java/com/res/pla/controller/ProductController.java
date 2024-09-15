@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.res.pla.domain.DateConflictDTO;
 import com.res.pla.domain.ProductDTO;
 import com.res.pla.domain.UserPurchasedProductDTO;
 import com.res.pla.service.ProductService;
@@ -140,7 +141,9 @@ public class ProductController {
 				log.info("날짜충돌검사 드가자 : {}", Fdate.form2(start_date));
 				log.info("날짜충돌검사 드가자 : {}", Fdate.form2(end_date));
 
-				boolean isDateConflictResult = uppservice.isDateConflict(id, start_date, end_date);    // 날짜 충돌 여부 검사
+				DateConflictDTO isDateConflictData = uppservice.isDateConflict(id, start_date, end_date);    // 날짜 충돌 여부 검사
+				boolean isDateConflictResult = isDateConflictData != null ? isDateConflictData.isConflicted() : null;
+
 				log.info("날짜충돌검사 결과 : " + isDateConflictResult);
 
 				if (isDateConflictResult == false) {
@@ -150,7 +153,6 @@ public class ProductController {
 						return ResponseEntity.status(HttpStatus.ACCEPTED).body("normal");
 
 					case "extend":
-						log.info("extend 시작합니다~~~~~~");
 						log.info("extend start_date : {}", Fdate.form2(start_date));
 						log.info("extend end_date : {}", Fdate.form2(end_date));
 
@@ -173,7 +175,8 @@ public class ProductController {
 					}
 
 				} else {
-					return ResponseEntity.status(HttpStatus.CONFLICT).body("date is Conflict"); // 409 Conflict
+					log.info("날짜 충돌");
+					return ResponseEntity.status(HttpStatus.CONFLICT).body(isDateConflictData); // 409 Conflict
 				}
 
 			} else {
@@ -258,50 +261,6 @@ public class ProductController {
 			throw e;
 		} // try-catch
 	} // 전체 메소드
-
-	//	//==[4. 연장 구매]=====================================================================================================================
-	//	@PostMapping("/extendDayPass")
-	//	public ResponseEntity<?> extendDayPass(@RequestBody Map<String, Object> requestData) {
-	//		try {
-	//			//			log.info("");
-	//			//			log.info("상품결제 요청 Data: " + requestData);
-	//
-	//			String id = (String) requestData.get("id");
-	//			int productcode = (int) requestData.get("productcode");
-	//			String pType = (String) requestData.get("ptype");
-	//			String payment = (String) requestData.get("paymentOption");
-	//
-	//			UserPurchasedProductDTO caledDayPass = uppservice.selectCalculatedTrueUpp(id);
-	//
-	//			LocalDateTime startDateTime = caledDayPass.getEnd_date();
-	//
-	//			int dayValue = productservice.selectProduct(productcode).getDay_value();
-	//			LocalDateTime endDateTime = startDateTime.plusSeconds(dayValue);
-	//
-	//			//==[1. 기간권 , 고정석 상품 구매]==================================================
-	//			if ((pType.equals("d") || pType.equals("f")) && (startDateTime != null && endDateTime != null)) {
-	//				LocalDateTime currentDateTime = LocalDateTime.now();        // 현재 시간.
-	//				log.info("");
-	//
-	//				String purchasedUppcode = productservice.purchaseProduct(id, productcode, startDateTime, endDateTime, false, payment, "extend");
-	//				uppservice.afterLaunchDayPassFromStartDate(id, purchasedUppcode, startDateTime, endDateTime);
-	//
-	//				log.info("연장 구매 시작  : {}", Fdate.form(startDateTime));
-	//				log.info("연장 구매 종료  : {}", Fdate.form(endDateTime));
-	//				log.info("");
-	//
-	//				return ResponseEntity.ok().build();
-	//			}
-	//
-	//			else {
-	//				log.info("존재하지 않는 상품 타입");
-	//				return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("unKnown pType Error");
-	//			}
-	//
-	//		} catch (Exception e) {
-	//			throw e;
-	//		} // try-catch
-	//	} // 전체 메소드
 
 	//=======================================================================================================================
 	@GetMapping("/allProductList")
