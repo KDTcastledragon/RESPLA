@@ -3,6 +3,8 @@ import './UserListPage.css';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 
+import UserBenModal from './UserBenModal';
+
 function UserListPage() {
 
     const [userList, setUserList] = useState([]);
@@ -10,6 +12,17 @@ function UserListPage() {
     const [searchWord, setSearchWord] = useState('');
     const [isCurrentUse, setIsCurrentUse] = useState('all');
     const [isBenned, setIsBenned] = useState('all');
+    const [benCause, setBenCause] = useState(false);
+    const [benCauseContent, setBenCauseContent] = useState();
+    const [benData, setBenData] = useState(
+        {
+            opened: false,
+            id: null,
+            isBenned: false,
+            name: '',
+            phoneNum: '',
+        }
+    );
 
 
     // [1. 모든 유저 정보]===================================================================================================
@@ -67,23 +80,15 @@ function UserListPage() {
     }
 
     // [4. 금지하기 / 해제]=====================================================================================================
-    function userBen(selectedId, state) {
-        const data = {
+    function userBen(selectedId, state, name, number) {
+        console.log(state);
+        setBenData({
+            opened: true,
             id: selectedId,
-            benned: state
-        }
-
-        console.log(data);
-
-        axios
-            .post(`/user/ben`, data)
-            .then(() => {
-                alert(`성공`);
-                window.location.reload();
-
-            }).catch((e) => {
-                alert(`금지 실패`);
-            })
+            isBenned: state,
+            name: name,
+            phoneNum: number
+        })
     }
 
     // [?. 날짜 포맷]===================================================================================================
@@ -96,7 +101,7 @@ function UserListPage() {
     }
 
 
-    // console.log(userList);
+    console.log(userList);
 
     //=====================================================================================================================
     return (
@@ -148,33 +153,42 @@ function UserListPage() {
                             <th>탈퇴일</th>
                             <th>금지 여부</th>
                             <th>금지 적용</th>
-                            <th></th>
+                            <th>{null}</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {userList && userList.length > 0 ? (
                             userList.map((d, i) => (
-                                <tr key={i} className={d.is_benned === '1' ? `userListTbodyTrBenned` : `userListTbodyTr`}>
+                                <tr key={i} className={d.benned === true ? `userListTbodyTrBenned` : `userListTbodyTr`}>
                                     <td>{d.id}</td>
                                     <td>{d.user_name}</td>
                                     <td>{birthFormatter(d.birth)}</td>
                                     <td>{phoneFormat(d.phone_number)}</td>
                                     <td>{d.join_date}</td>
                                     <td>{d.deactivation_date}</td>
-                                    <td>{d.is_benned === '1' ? '금지' : ''}</td>
                                     <td>
-                                        {d.is_benned === '1' ?
+                                        {d.benned === true ?
+                                            <button onClick={
+                                                () => {
+                                                    setBenCause(true);
+                                                    setBenCauseContent(d.ben_cause);
+                                                }
+                                            }>금지</button>
+                                            : null
+                                        }
+                                    </td>
+                                    <td>
+                                        {d.benned === true ?
                                             <div className='unBenButton'>
-                                                <button onClick={() => userBen(d.id, d.is_benned)}>금지해제</button>
+                                                <button onClick={() => userBen(d.id, d.benned, d.user_name, d.phone_number)}>금지해제</button>
                                             </div>
                                             :
                                             <div className='benButton'>
-                                                <button onClick={() => userBen(d.id, d.is_benned)}>이용금지</button>
+                                                <button onClick={() => userBen(d.id, d.benned, d.user_name, d.phone_number)}>이용금지</button>
                                             </div>
                                         }
                                     </td>
-
                                 </tr>
                             )))
                             :
@@ -187,6 +201,25 @@ function UserListPage() {
                     </tbody>
                 </table>
             </div>
+
+            {benData.opened && (
+                <UserBenModal
+                    benData={benData}
+                    setBenData={setBenData}
+                />
+            )
+            }
+
+            {benCause && (
+                <div className='benCauseContentContainerBackGround'>
+                    <div className='benCauseContentContainer'>
+                        <div><span>이용 금지 사유</span></div>
+                        <div>{benCauseContent}</div>
+                        <div><button onClick={() => setBenCause(false)}>닫기</button></div>
+
+                    </div>
+                </div>
+            )}
         </>
     )
 }

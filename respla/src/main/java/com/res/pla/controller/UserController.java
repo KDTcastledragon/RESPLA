@@ -43,20 +43,34 @@ public class UserController {
 
 		UserDTO dto = userservice.selectUser(id);
 
-		if (dto != null && userservice.matchId(id) == true) {
-			log.info("login 성공" + dto.toString());
+		if (dto != null) {
+			boolean ben = dto.isBenned();
 
-			return new ResponseEntity<>(dto, HttpStatus.OK);
+			if (ben == true) {
+				return ResponseEntity.status(HttpStatus.FORBIDDEN).body("benned_user");
 
-		} else if (dto == null) {
-			log.info("아이디 없음");
-			return new ResponseEntity<>(dto, HttpStatus.BAD_GATEWAY);
+			} else if (userservice.matchId(id) == true) {
+				log.info("login 성공" + dto.toString());
+
+				return new ResponseEntity<>(dto, HttpStatus.OK);
+
+			} else {
+				return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("bad");
+			}
 
 		} else {
-			log.info("아이디 불일치" + dto.toString());
 			return new ResponseEntity<>(dto, HttpStatus.UNAUTHORIZED);
 		}
 	}
+	//	{
+	//		log.info("아이디 없음");
+	//
+	//	}else
+	//	{
+	//		log.info("아이디 불일치" + dto.toString());
+	//		return new ResponseEntity<>(dto, HttpStatus.UNAUTHORIZED);
+	//	}
+	//	}}
 
 	//====[2. 로그인 유저 실시간 정보]========================================================================================
 	@PostMapping("/loginedUser")
@@ -107,6 +121,7 @@ public class UserController {
 	@GetMapping("/allUserList")
 	public ResponseEntity<?> allUserList() {
 		List<UserDTO> userList = userservice.selectAllUsers();
+		log.info("all user : {}", userList);
 
 		return ResponseEntity.ok(userList);
 	}
@@ -187,17 +202,20 @@ public class UserController {
 		log.info("ben_data : {}", data);
 
 		String id = data.get("id");
-		String ben = data.get("benned");
+		String benState = data.get("isBenned");
+		String cause = data.get("benCause");
 
-		log.info("벤! {} {}", id, ben);
+		log.info("벤! {} {}", id, benState);
 
-		boolean isBenned = userservice.ben(id, ben);
+		boolean isBenned = "true".equalsIgnoreCase(benState);
 
-		if (isBenned) {
+		boolean result = userservice.ben(id, isBenned, cause);
+
+		if (result) {
 			return ResponseEntity.ok().build();
 
 		} else {
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("alreadyed");
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("conflict");
 		}
 	}
 

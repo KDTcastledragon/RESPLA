@@ -263,9 +263,10 @@ function MainHomePage() {
         }).catch((error) => {
             if (error.response.status === 401) {
                 alert('아이디없음');
-            } else {
-                alert('없는 아이디입니다.');
+            } else if (error.response.status === 403) {
+                alert('이용이 제한된 사용자입니다.');
             }
+
             window.location.reload();
         });
     }

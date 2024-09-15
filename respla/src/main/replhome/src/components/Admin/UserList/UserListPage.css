@@ -66,6 +66,7 @@
     border: 1px solid black;
     text-align: center;
     border-collapse: collapse;
+    padding: 0;
 }
 
 .UserListPageContainer>table>tbody {
@@ -102,7 +103,7 @@
 
 .userListPageTable>thead>tr>th:nth-child(2),
 .userListPageTable>tbody>tr>td:nth-child(2) {
-    width: 120px;
+    width: 150px;
     /* background-color: orange; */
 }
 
@@ -120,42 +121,38 @@
 
 .userListPageTable>thead>tr>th:nth-child(5),
 .userListPageTable>tbody>tr>td:nth-child(5) {
-    width: 80px;
+    width: 210px;
     /* background-color: rgb(120, 120, 255); */
 }
 
 .userListPageTable>thead>tr>th:nth-child(6),
 .userListPageTable>tbody>tr>td:nth-child(6) {
-    width: 50px;
+    width: 210px;
     /* background-color: rgb(169, 77, 255); */
 }
 
 .userListPageTable>thead>tr>th:nth-child(7),
 .userListPageTable>tbody>tr>td:nth-child(7) {
-    width: 50px;
+    width: 80px;
     /* background-color: aquamarine; */
 }
 
 .userListPageTable>thead>tr>th:nth-child(8),
 .userListPageTable>tbody>tr>td:nth-child(8) {
-    width: 80px;
+    width: 110px;
     /* background-color: rgb(167, 119, 119); */
 }
 
-.userListPageTable>thead>tr>th:nth-child(9),
-.userListPageTable>tbody>tr>td:nth-child(9) {
-    width: 80px;
+.userListPageTable>thead>tr>th:nth-child(9) {
+    width: 15px;
     /* background-color: cornflowerblue; */
-}
-
-.userListPageTable>thead>tr>th:nth-child(10) {
-    width: 11px;
-    /* 스크롤바 너비 보정값 */
 }
 
 .userListPageTable>thead>tr>th {
     background-color: rgb(238, 238, 238);
 }
+
+.userListPageTable>tbody>tr>td:nth-child(8) {}
 
 
 /* [기타 넓이 높이 설정]================================================================================================================== */
@@ -187,15 +184,17 @@
     background-color: white;
 }
 
-/* =====[ben Button]============================= */
+/* =====[이용금지 / 해제 버튼]============================= */
 .unBenButton,
 .benButton {
     width: 80px;
     height: 28px;
+    margin: auto;
 }
 
 .unBenButton>button,
 .benButton>button {
+    display: inline-block;
     width: 100%;
     height: 100%;
     border: none;
@@ -209,12 +208,21 @@
 
 .UserListPageContainer>table>tbody>.userListTbodyTrBenned>td>.unBenButton>button {
     background-color: rgb(0, 189, 0) !important;
-    opacity: 1 !important;
 }
 
-.UserListPageContainer>table>tbody>.userListTbodyTrBenned>td:nth-child(7) {
+.UserListPageContainer>table>tbody>.userListTbodyTrBenned>td:nth-child(7)>button {
+    display: inline-block;
+    width: 60px;
     color: red;
     font-weight: bold;
+    border: 1px solid red;
+}
+
+.UserListPageContainer>table>tbody>.userListTbodyTrBenned>td:nth-child(7)>button:hover {
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    border: 3px solid black;
 }
 
 .UserListPageContainer>table>tbody>.userListTbodyTrBenned>td>.unBenButton>button:hover {
@@ -222,4 +230,81 @@
     color: white;
     font-weight: bold;
     opacity: 1 !important;
+    cursor: pointer;
+}
+
+.UserListPageContainer>table>tbody>.userListTbodyTr>td>.benButton>button:hover {
+    background-color: rgb(157, 0, 0);
+    color: white;
+    font-weight: bold;
+    opacity: 1 !important;
+    cursor: pointer;
+}
+
+
+/* ====[이용 금지 사유 모달]============ */
+.benCauseContentContainerBackGround {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.616);
+}
+
+.benCauseContentContainer {
+    position: fixed;
+    width: 700px;
+    height: 400px;
+    background-color: rgb(236, 236, 236);
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 3px solid black;
+}
+
+.benCauseContentContainer>div {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+.benCauseContentContainer>div:nth-child(1) {
+    font-size: 30px;
+    height: 40px;
+    line-height: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.benCauseContentContainer>div:nth-child(2) {
+    text-align: left;
+    border: none;
+    background-color: white;
+    height: 250px;
+    margin-top: 30px;
+}
+
+.benCauseContentContainer>div:nth-child(3) {
+    text-align: center;
+    border: none;
+    /* background-color: white; */
+    height: 40px;
+    margin-top: 10px;
+}
+
+.benCauseContentContainer>div:nth-child(3)>button {
+    border: none;
+    width: 200px;
+    height: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.benCauseContentContainer>div:nth-child(3)>button:hover {
+    cursor: pointer;
+    background-color: rgb(74, 74, 74);
 }

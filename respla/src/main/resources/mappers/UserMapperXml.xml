@@ -30,7 +30,15 @@
     </select>
     
     <update id="convertIsBenned">
-        update user set is_benned = #{reversedBenned} where id=#{id}
+        update user set benned = #{reversedBenned} where id=#{id}
+    </update>
+    
+    <update id="updateBenCause">
+        update user set ben_cause = #{cause} where id=#{id}
+    </update>
+    
+    <update id="benCountUp">
+        update user set ben_count = ben_count+1 where id=#{id}
     </update>
 
 </mapper>

@@ -13,6 +13,8 @@ public interface UserMapper {
 
 	List<UserDTO> selectAllUsers();
 
+	UserDTO selectBySearchWordOnlyOne(String word);
+
 	int matchId(String id);
 
 	List<UserDTO> selectBySearchWord(String searchWord);
@@ -21,6 +23,8 @@ public interface UserMapper {
 
 	int convertIsBenned(String id, boolean reversedBenned);
 
-	UserDTO selectBySearchWordOnlyOne(String word);
+	int updateBenCause(String id, String cause);
+
+	int benCountUp(String id);
 
 }

@@ -9,15 +9,18 @@ import lombok.NoArgsConstructor;
 @Data
 public class UserDTO {
 	private String id;
+	private String password;
 
 	private String user_name;
-
 	private String birth;
 	private String phone_number;
 
 	private String join_date;
 	private String deactivation_date;
 
-	private String is_benned;
+	private boolean benned;
+	private String ben_cause;
+	private String unben_cause;
+	private int ben_count;
 
 }

@@ -79,16 +79,28 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean ben(String id, String ben) {
+	public boolean ben(String id, boolean ben, String cause) {
 		log.info("ben 값: {}", ben);
 
-		if (ben.equals("1")) {
-			return usermapper.convertIsBenned(id, false) > 0;
+		int converted;
+		int caused;
+		int benCount;
 
-		} else if (ben.equals("0")) {
-			return usermapper.convertIsBenned(id, true) > 0;
+		if (ben == true) {
+			converted = usermapper.convertIsBenned(id, false);
+			caused = usermapper.updateBenCause(id, cause);
+			benCount = usermapper.benCountUp(id);
+
+			return converted > 0 && caused > 0 && benCount > 0;
+
+		} else if (ben == false) {
+			converted = usermapper.convertIsBenned(id, true);
+			caused = usermapper.updateBenCause(id, cause);
+
+			return converted > 0 && caused > 0;
 
 		} else {
+
 			return false;
 		}
 	}

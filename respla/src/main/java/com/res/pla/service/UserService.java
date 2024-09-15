@@ -18,6 +18,6 @@ public interface UserService {
 
 	List<UserDTO> selectByBenned(boolean opt);
 
-	boolean ben(String id, String ben);
+	boolean ben(String id, boolean ben, String cause);
 
 }

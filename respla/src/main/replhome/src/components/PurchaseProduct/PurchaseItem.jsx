@@ -256,7 +256,6 @@ function PurchaseItem({ product_code, time_value, day_value, price, sell_count }
 
                         <div className='purchaseDayPassButtonBox'>
                             <button onClick={() => normalOrder(startDateTime, endDateTime, 'normal')}>일반구매</button>
-                            <hr />
                             <button onClick={() => normalOrder(null, null, 'extend')}>연장구매</button>
                         </div>
                     </>
