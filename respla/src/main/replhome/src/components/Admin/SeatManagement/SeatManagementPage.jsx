@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 import SeatUnit from './SeatUnit';
-import SeatSearchModal from './SeatSearchModal';
 import SeatUnitControlModal from './SeatUnitControlModal';
 
 
@@ -160,8 +159,10 @@ function SeatManagementPage() {
                 }
 
             </div>
-            <div className='seatSearchButton'><button onClick={() => searchSeat()}>좌석 검색</button></div>
-            {/* <div className='fixedSeatMoveButton'><button onClick={() => fixedSeatMove()}>고정석 자리 이동</button></div> */}
+            <div className='seatManageButton'>
+                <div className='seatSearchButton'><button onClick={() => searchSeat()}>좌석 검색</button></div>
+                <div className='fixedSeatMoveButton'><button onClick={() => fixedSeatMove()}>고정석 자리 이동</button></div>
+            </div>
         </>
     )
 }

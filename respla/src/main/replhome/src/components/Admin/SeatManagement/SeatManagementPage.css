@@ -9,14 +9,28 @@
 }
 
 /* ========================= */
-.seatSearchButton {
-    width: 150px;
+.seatManageButton {
+    width: 1100px;
     height: 70px;
     position: sticky;
     margin-top: 0px;
-    margin-left: 170px;
+    margin-left: 83px;
     top: 50px;
     z-index: 3;
+    /* background-color: aqua; */
+    display: flex;
+    gap: 150px;
+    padding-left: 100px;
+}
+
+.seatSearchButton,
+.fixedSeatMoveButton {
+    width: 150px;
+    height: 100%;
+}
+
+.fixedSeatMoveButton {
+    width: 300px;
 }
 
 .seatSearchButton>button {
@@ -34,17 +48,23 @@
     cursor: pointer;
 }
 
+.fixedSeatMoveButton>button {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(177, 186, 255);
+    border: none;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.fixedSeatMoveButton>button:hover {
+    background-color: rgb(87, 109, 254);
+    color: white;
+    cursor: pointer;
+}
+
 
 /* ========================================== */
-/* .fixedSeatMoveButton {
-    width: 150px;
-    height: 70px;
-    position: sticky;
-    margin-top: 0px;
-    margin-left: 500px;
-    top: 50px;
-    z-index: 3;
-} */
 
 
 /* ========================================== */
