@@ -226,7 +226,7 @@ function PurchaseItem({ product_code, time_value, day_value, price, sell_count }
                     <>
                         <div className='dayPassInfoTitle'>
                             {/* <span>{day_value / 24 < 300 ? `${day_value / 7 / 24} 주` : `1년`}</span> */}
-                            <span>{`${Math.floor(day_value / 60)} 분`}</span>
+                            <span>{`${Math.floor(day_value / 24)} 일`}</span>
                         </div>
 
                         <div className='dayPassPrice'>

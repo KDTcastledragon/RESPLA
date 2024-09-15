@@ -36,6 +36,18 @@
 
 
 /* ========================================== */
+/* .fixedSeatMoveButton {
+    width: 150px;
+    height: 70px;
+    position: sticky;
+    margin-top: 0px;
+    margin-left: 500px;
+    top: 50px;
+    z-index: 3;
+} */
+
+
+/* ========================================== */
 .seatRoom1 {
     position: relative;
     width: 100%;
