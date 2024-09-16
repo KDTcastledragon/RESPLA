@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.res.pla.domain.AdminDTO;
 import com.res.pla.domain.UserDTO;
 import com.res.pla.domain.UserPurchasedProductDTO;
 import com.res.pla.service.SeatFacade;
@@ -234,9 +235,13 @@ public class UserController {
 
 	//====[관리자 로그인]======================================================================================================
 	@PostMapping("/adminLogIn")
-	public ResponseEntity<?> adminLogIn() {
+	public ResponseEntity<?> adminLogIn(@RequestBody AdminDTO data) {
 		log.info("");
-		log.info("ben_data : {}", data);
+		log.info("adminData : {}", data);
+
+		String id = data.getId();
+		String password = data.getPassword();
+		return ResponseEntity.ok().body(id);
 	}
 
 }

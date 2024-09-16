@@ -9,20 +9,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UserDTO {
+public class AdminDTO {
 	private String id;
 	private String password;
 
-	private String user_name;
+	private String admin_name;
 	private LocalDateTime birth;
 	private String phone_number;
 
-	private LocalDateTime join_date;
-	private LocalDateTime deactivation_date;
+	private String authentication;
 
-	private boolean benned;
-	private String ben_cause;
-	private String unben_cause;
-	private int ben_count;
+	private LocalDateTime latest_update_date;
 
 }
