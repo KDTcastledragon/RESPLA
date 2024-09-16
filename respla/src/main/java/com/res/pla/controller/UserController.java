@@ -219,7 +219,7 @@ public class UserController {
 		}
 	}
 
-	//====[9. 이용 금지 처분]========================================================================================isCurrentUse
+	//====[9. 이용 금지 처분]========================================================================================
 	@PostMapping("/profile")
 	public ResponseEntity<?> profile(@RequestBody Map<String, String> data) {
 		log.info("");
@@ -230,6 +230,13 @@ public class UserController {
 		UserDTO userInfo = userservice.selectUser(id);
 
 		return ResponseEntity.ok().body(userInfo);
+	}
+
+	//====[관리자 로그인]======================================================================================================
+	@PostMapping("/adminLogIn")
+	public ResponseEntity<?> adminLogIn() {
+		log.info("");
+		log.info("ben_data : {}", data);
 	}
 
 }

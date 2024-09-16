@@ -8,16 +8,18 @@ function AdminPage() {
 
     const navigator = useNavigate();
 
-    const [loginID, setLoginID] = useState(null);
+    const adminID = sessionStorage.getItem('authenticatedAdminID');
 
-    useEffect(() => {
-        const id = sessionStorage.getItem('loginID');
-        if (id) {
-            setLoginID(id);
-        } else {
-            navigator('/');  // 로그인되지 않은 상태에서 접근 시 홈으로 리다이렉트
-        }
-    }, [navigator]);
+    // useEffect(() => {
+    //     const id = sessionStorage.getItem('loginID');
+    //     if (adminID === 'superAdmin') {
+    //         setLoginID(id);
+    //     } else {
+    //         navigator('/');  // 로그인되지 않은 상태에서 접근 시 홈으로 리다이렉트
+    //         alert(`허가되지 않은 접근`);
+    //         window.location.reload();
+    //     }
+    // }, [navigator]);
 
     const logout = () => {
         sessionStorage.clear();
@@ -27,10 +29,10 @@ function AdminPage() {
 
     return (
         <>
-            {loginID === 'admin' ?
+            {adminID === 'superAdmin' ?
                 <div className='AdminPageContainer'>
 
-                    <div>Admin Page FireTruck</div>
+                    <div>{adminID}</div>
                     <button onClick={logout}>로그아웃</button>
                 </div>
 

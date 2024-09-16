@@ -187,3 +187,33 @@
     cursor: pointer;
     transform: scale(1.3);
 }
+
+/* ========[출입문 개방]============ */
+.openEntryDoorContainerBackGround {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(210, 210, 210, 0.182);
+}
+
+.openEntryDoorContainer {
+    position: fixed;
+    width: 600px;
+    height: 300px;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.openEntryDoorContainer>span {
+    display: inline-block;
+    font-size: 40px;
+    font-weight: bold;
+}

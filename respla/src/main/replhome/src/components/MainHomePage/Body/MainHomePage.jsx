@@ -15,7 +15,7 @@ function MainHomePage() {
     const navigator = useNavigate();
     const loginID = sessionStorage.getItem("loginID");
     const [cautionContainerOpen, setCautionContainerOpen] = useState(false);
-    // const [checkInUseProductsOpen, setCheckInUseProductsOpen] = useState(false);  // 만약 초기값을 ''으로 설정하면 String이고, 817으로 설정하면 integer 가 된다.
+    const [openEntryDoor, setOpenEntryDoor] = useState(false);
 
     const [isCurrentUseModal, setIsCurrentUseModal] = useState({        // 기존에 false만 담았던 boolean타입에서 Object타입으로 변경.
         isOpen: false,
@@ -29,7 +29,10 @@ function MainHomePage() {
 
 
     //==[0. 로그인 후 이용 가능.]========================================================================================
-    const loginRequired = () => { alert(`로그인 후 이용가능합니다.`); }
+    const loginRequired = () => {
+        alert(`로그인 후 이용가능합니다.`);
+        navigator('/LogInPage');
+    }
 
     //==[2. isCurrentModal작동시, 타이머 설정]=========================================================================================
     useEffect(() => {
@@ -244,7 +247,7 @@ function MainHomePage() {
             sessionStorage.setItem('loginID', res.data.id);
             sessionStorage.setItem('loginName', res.data.name);
             if (sessionStorage.getItem('loginID') === 'admin') {
-                navigator('/AdminPage');
+                // navigator('/AdminPage');
                 window.location.reload();
             } else {
                 navigator('/');
@@ -268,19 +271,32 @@ function MainHomePage() {
         navigator('/PurchasePage');
     }
 
+
+    function handleEntryDoor() {
+        setOpenEntryDoor(true);
+        const data = { id: loginID }
+        axios
+            .post('/user/openDoor', data)
+            .then((r) => {
+                setOpenEntryDoor(true);
+            }).catch((e) => {
+                // alert(`입실후 이용해주세요.`);
+            })
+    }
     //===================================================================================================================
     return (
         <div className='MainHomePageContainer'>
-            <div className='mainHomePageNoticeBox'>
-                <button style={{ width: '300px', height: '100px' }} onClick={() => setCautionContainerOpen(true)}>카페이용 주의사항</button>
-                <button style={{ width: '300px', height: '100px' }} onClick={() => purchasePageImSI('m')}>시간권</button>
-                <button style={{ width: '300px', height: '100px' }} onClick={() => purchasePageImSI('d')}>기간권</button>
-                <button style={{ width: '300px', height: '100px' }} onClick={() => purchasePageImSI('f')}>고정석</button>
-            </div>
-
             {loginID ?
                 (
                     <>
+                        <div className='mainHomePageNoticeBox'>
+                            <button style={{ width: '300px', height: '100px' }} onClick={() => setCautionContainerOpen(true)}>카페이용 주의사항</button>
+                            <button onClick={handleEntryDoor}>출입문 열기</button>
+                            {/* <button style={{ width: '300px', height: '100px' }} onClick={() => purchasePageImSI('m')}>시간권</button> */}
+                            {/* <button style={{ width: '300px', height: '100px' }} onClick={() => purchasePageImSI('d')}>기간권</button> */}
+                            {/* <button style={{ width: '300px', height: '100px' }} onClick={() => purchasePageImSI('f')}>고정석</button> */}
+                        </div>
+
                         <div className='homeBodyLoginedMenu'>
                             <div className='loginedMenuTitle'><span>사용</span></div>
                             <div className='loginedPurchaseProduct' ><button onClick={() => handleMenu('purchase')}>이용권 구매</button></div>
@@ -308,10 +324,18 @@ function MainHomePage() {
                 :
                 (
                     <>
+                        <div className='mainHomePageNoticeBox'>
+                            <button style={{ width: '300px', height: '100px' }} onClick={() => setCautionContainerOpen(true)}>카페이용 주의사항</button>
+                            <button onClick={loginRequired}>출입문 열기</button>
+                            {/* <button style={{ width: '300px', height: '100px' }} onClick={() => purchasePageImSI('m')}>시간권</button> */}
+                            {/* <button style={{ width: '300px', height: '100px' }} onClick={() => purchasePageImSI('d')}>기간권</button> */}
+                            {/* <button style={{ width: '300px', height: '100px' }} onClick={() => purchasePageImSI('f')}>고정석</button> */}
+                        </div>
+
                         <div className='homeBodyLogoutedMenu'>
                             <div className='loginedMenuTitle'><span>사용</span></div>
-                            <div className='logoutedPurchaseProductLink'><Link to={`/LogInPage`} onClick={loginRequired} >이용권 구매</Link></div>
-                            <div className='logoutedCheckInLink'><Link to={'/LogInPage'} onClick={loginRequired} >입실</Link></div>
+                            <div className='logoutedPurchaseProductLink'><button onClick={loginRequired} >이용권 구매</button></div>
+                            <div className='logoutedCheckInLink'><button onClick={loginRequired} >입실</button></div>
                             <div className='logoutedSeatPresent' ><button onClick={() => openSeatPrensent('seatpresent')}>좌석현황</button></div>
                         </div>
 
@@ -334,6 +358,15 @@ function MainHomePage() {
                 <Caution
                     setCautionContainerOpen={setCautionContainerOpen}
                 />
+            }
+
+            {openEntryDoor && (
+                <div className='openEntryDoorContainerBackGround' onClick={() => setOpenEntryDoor(false)}>
+                    <div className='openEntryDoorContainer'>
+                        <span>출입문이 열립니다.</span>
+                    </div>
+                </div>
+            )
             }
         </div >
     )

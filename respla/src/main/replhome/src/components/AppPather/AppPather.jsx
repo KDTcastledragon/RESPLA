@@ -5,14 +5,16 @@ import MainHomeHeader from '../MainHomePage/Header/MainHomeHeader';
 import RouteBody from "../MainHomePage/Body/RouteBody";
 
 import AdminPageMenuBar from "../Admin/AdminPageMenuBar";
+import AdminLogInPage from '../Admin/AdminLogInPage';
 
 
 //===================================================================================================================
 function AppPather() {
-    const loginID = sessionStorage.getItem('loginID');
+    const adminID = sessionStorage.getItem('authenticatedAdminID');
+    const authenAdmin = sessionStorage.getItem('authenticationAdminPage');
     return (
         <>
-            {loginID === 'admin' ?
+            {adminID === 'superAdmin' ?
                 <>
                     <AdminPageHeader></AdminPageHeader>
                     <div className="AppPatherAdminMenuBarRouteBody">
@@ -24,6 +26,12 @@ function AppPather() {
                         </div>
                     </div>
                 </>
+
+                // : authenAdmin === 'adminLogIn' ?
+                //     <>
+                //         <RouteBody></RouteBody>
+                //     </>
+
                 :
                 <>
                     <div className='AppPatherMainHomeHeader'>

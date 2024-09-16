@@ -13,6 +13,7 @@ import SeatPresentPage from "../../SeatPresent/SeatPresentPage";
 import MyPage from "../../UserInfo/MyPage/MyPage";
 import UsageHistory from "../../UserInfo/MyPage/UsageHistory";
 import UserProfilePage from "../../UserInfo/MyPage/UserProfilePage";
+import AdminLogInPage from "../../Admin/AdminLogInPage";
 
 function RouteBody() {
 
@@ -20,6 +21,8 @@ function RouteBody() {
         <>
             <Routes>
                 <Route path='/' element={<MainHomePage />}></Route>
+
+                <Route path='/AdminLogInPage' element={<AdminLogInPage />} ></Route>
 
                 <Route path='/LogInPage' element={<LogInPage />} ></Route>
                 <Route path='/JoinMemberPage' element={<JoinMemberPage />} ></Route>

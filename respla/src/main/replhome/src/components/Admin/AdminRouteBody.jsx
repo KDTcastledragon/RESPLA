@@ -6,12 +6,9 @@ import UserListPage from "./UserList/UserListPage";
 import SalesStatusPage from "./SalesStatus/SalesStatusPage";
 import SeatManagementPage from "./SeatManagement/SeatManagementPage";
 import ProductManagementPage from "./ProductManagement/ProductManagementPage";
+import AdminLogInPage from "./AdminLogInPage";
 
 function AdminRouteBody() {
-
-    const isAuthenticated = sessionStorage.getItem('loginID') === 'admin'; // 인증 상태 확인
-
-
     return (
         <>
             <Routes>
@@ -20,6 +17,8 @@ function AdminRouteBody() {
                 <Route path='/SalesStatusPage' element={<SalesStatusPage />} />
                 <Route path='/SeatManagementPage' element={<SeatManagementPage />} />
                 <Route path='/ProductManagementPage' element={<ProductManagementPage />} />
+
+                <Route path='/AdminLogInPage' element={<AdminLogInPage />} />
             </Routes>
         </>
     )
