@@ -39,6 +39,7 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody UserDTO request) {
 		String id = request.getId();
+		String pw = request.getPassword();
 
 		log.info("request.id :" + id);
 
@@ -50,28 +51,29 @@ public class UserController {
 			if (ben == true) {
 				return ResponseEntity.status(HttpStatus.FORBIDDEN).body("benned_user");
 
-			} else if (userservice.matchId(id) == true) {
-				log.info("login 성공" + dto.toString());
-
-				return new ResponseEntity<>(dto, HttpStatus.OK);
-
 			} else {
-				return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("bad");
+				boolean isMatchedId = userservice.matchId(id);
+
+				if (isMatchedId) {
+					log.info("비밀번호 일치 검사");
+
+					return new ResponseEntity<>(dto, HttpStatus.OK);
+
+				} else {
+					return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("bad");
+				}
 			}
 
 		} else {
 			return new ResponseEntity<>(dto, HttpStatus.UNAUTHORIZED);
 		}
 	}
-	//	{
-	//		log.info("아이디 없음");
+
+	//====[2. 회원가입]========================================================================================
+	//	@PostMapping("/join")
+	//	public ResponseEntity<?> join(@RequestBody UserDTO data) {
 	//
-	//	}else
-	//	{
-	//		log.info("아이디 불일치" + dto.toString());
-	//		return new ResponseEntity<>(dto, HttpStatus.UNAUTHORIZED);
 	//	}
-	//	}}
 
 	//====[2. 로그인 유저 실시간 정보]========================================================================================
 	@PostMapping("/loginedUser")
