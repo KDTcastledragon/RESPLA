@@ -220,51 +220,51 @@ function MainHomePage() {
             });
     };
 
-    // ===지워야됨 나중에@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2
-    const [ulist, sulist] = useState([]);
-    useEffect(() => {
-        axios
-            .get(`/user/allUserList`)
-            .then((r) => {
-                sulist(r.data);
-            }).catch((e) => {
-            });
-    }, [])
+    // // ===지워야됨 나중에@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2
+    // const [ulist, sulist] = useState([]);
+    // useEffect(() => {
+    //     axios
+    //         .get(`/user/allUserList`)
+    //         .then((r) => {
+    //             sulist(r.data);
+    //         }).catch((e) => {
+    //         });
+    // }, [])
 
 
     // ** 로그인 데이터 전송
-    const logInButton = (isId) => {
-        axios({
-            url: "/user/login",
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            data: {
-                id: isId,
-            }
-            // [===로그인 성공시===]
-        }).then((res) => {
-            sessionStorage.setItem('user', JSON.stringify(res.data));
-            sessionStorage.setItem('loginID', res.data.id);
-            sessionStorage.setItem('loginName', res.data.name);
-            if (sessionStorage.getItem('loginID') === 'admin') {
-                // navigator('/AdminPage');
-                window.location.reload();
-            } else {
-                navigator('/');
-            }
-            // window.location.reload();
+    // const logInButton = (isId) => {
+    //     axios({
+    //         url: "/user/login",
+    //         method: 'post',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         data: {
+    //             id: isId,
+    //         }
+    //         // [===로그인 성공시===]
+    //     }).then((res) => {
+    //         sessionStorage.setItem('user', JSON.stringify(res.data));
+    //         sessionStorage.setItem('loginID', res.data.id);
+    //         sessionStorage.setItem('loginName', res.data.name);
+    //         if (sessionStorage.getItem('loginID') === 'admin') {
+    //             // navigator('/AdminPage');
+    //             window.location.reload();
+    //         } else {
+    //             navigator('/');
+    //         }
+    //         // window.location.reload();
 
-            // [===로그인 실패시===]
-        }).catch((error) => {
-            if (error.response.status === 401) {
-                alert('아이디없음');
-            } else if (error.response.status === 403) {
-                alert('이용이 제한된 사용자입니다.');
-            }
+    //         // [===로그인 실패시===]
+    //     }).catch((error) => {
+    //         if (error.response.status === 401) {
+    //             alert('아이디없음');
+    //         } else if (error.response.status === 403) {
+    //             alert('이용이 제한된 사용자입니다.');
+    //         }
 
-            window.location.reload();
-        });
-    }
+    //         window.location.reload();
+    //     });
+    // }
 
     function purchasePageImSI(ptype) {
         sessionStorage.setItem('ptype', ptype);
@@ -327,9 +327,6 @@ function MainHomePage() {
                         <div className='mainHomePageNoticeBox'>
                             <button style={{ width: '300px', height: '100px' }} onClick={() => setCautionContainerOpen(true)}>카페이용 주의사항</button>
                             <button onClick={loginRequired}>출입문 열기</button>
-                            {/* <button style={{ width: '300px', height: '100px' }} onClick={() => purchasePageImSI('m')}>시간권</button> */}
-                            {/* <button style={{ width: '300px', height: '100px' }} onClick={() => purchasePageImSI('d')}>기간권</button> */}
-                            {/* <button style={{ width: '300px', height: '100px' }} onClick={() => purchasePageImSI('f')}>고정석</button> */}
                         </div>
 
                         <div className='homeBodyLogoutedMenu'>
