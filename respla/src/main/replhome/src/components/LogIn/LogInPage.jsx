@@ -49,12 +49,17 @@ function LogInPage() {
                     <div className='loginId'>
                         <span>아이디</span>
                         <input type="text" value={id}
-                            onChange={(e) => setId(e.target.value)} />
+                            onChange={(e) => setId(e.target.value)} minLength={10} />
                     </div>
                     <div className='loginPw'>
                         <span>비밀번호</span>
                         <input type="password" value={pw}
-                            onChange={(e) => setPw(e.target.value)} />
+                            onChange={(e) => setPw(e.target.value)} minLength={15} />
+                    </div>
+
+                    <div className='findJoinBox'>
+                        <button onClick={() => navigator('/')}>아이디/비밀번호 찾기</button>
+                        <button onClick={() => navigator('/')}>회원가입</button>
                     </div>
                 </div>
 
