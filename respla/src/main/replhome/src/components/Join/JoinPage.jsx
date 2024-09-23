@@ -16,45 +16,40 @@ function JoinPage() {
     const [validName, setValidName] = useState(false);
     const [nameMsg, setNameMsg] = useState('');
 
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [validPhoneNumber, setValidPhoneNumber] = useState(false);
+    const [phoneNumberMsg, setPhoneNumberMsg] = useState('');
+
     const [birth, setBirth] = useState();
-    const [phoneNum, setPhoneNum] = useState('');
 
     const idRegex = /^[a-zA-Z0-9]*$/;
     const pwRegex = /[!@#$%^&*(),.?":{}|<>]/;
     const noKorPwRegex = /^[^가-힣]*$/;
     const nameRegex = /^[가-힣a-zA-Z]*$/;
-    const phoneNumRegex = /^010\d{7,8}$/;
-
-    // ** 생년월일 select 생성
-    const currentYear = new Date().getFullYear();
-    const years = Array.from({ length: 151 }, (_, index) => currentYear - index);
-    const month = Array.from({ length: 12 }, (_, index) => index + 1);
-    const day = Array.from({ length: 31 }, (_, index) => index + 1)
-
-    // ** 숫자가 1자리인 경우 앞에 0을 붙임
-    const formatDateNumber = (number) => {
-        return String(number).padStart(2, '0');
-    };
+    const phoneNumberRegex = /^010\d{7,8}$/;
 
 
     //======================
     function idDupCheck() {
-        if (id.length < 5 || id.length > 10) {
-            alert('아이디는 5자 이상, 10자 이하여야 합니다.');
-        } else if (!idRegex.test(id)) {
-            alert(`아이디는 영문과 숫자만 가능합니다.`);
-        } else {
-            const data = { id: id }
+        // if (id.length < 5 || id.length > 10) {
+        //     alert('아이디는 5자 이상, 10자 이하여야 합니다.');
+        // } else if (!idRegex.test(id)) {
+        //     alert(`아이디는 영문과 숫자만 가능합니다.`);
+        // } else {
+        //     const data = { id: id }
 
-            axios
-                .post('/user/idDupCheck', data)
-                .then((r) => {
-                    alert(`가능`);
-                    setValidId(true);
-                }).catch((e) => {
-                    alert(`겹침ㄴㄴ`);
-                })
-        }
+        //     axios
+        //         .post('/user/idDupCheck', data)
+        //         .then((r) => {
+        //             alert(`가능`);
+        //             setValidId(true);
+        //         }).catch((e) => {
+        //             alert(`겹침ㄴㄴ`);
+        //         })
+        // }
+
+        setValidId(true);
+        alert(`valid Id True`);
     }
 
     //======================
@@ -75,7 +70,7 @@ function JoinPage() {
     }
 
     function handleValidateName() {
-        if (name.length < 1) {
+        if (name.length < 2) {
             setNameMsg('이름을 입력해주세요');
             setValidName(false);
         } else if (!nameRegex.test(name)) {
@@ -83,32 +78,57 @@ function JoinPage() {
             setValidName(false);
         } else {
             setValidName(true);
-            setNameMsg('적절한 이름');
+            setNameMsg('');
+        }
+    }
+
+    function handleValidatePhoneNumber() {
+        if (!phoneNumberRegex.test(phoneNumber)) {
+            setPhoneNumberMsg('유효하지 않은 번호입니다');
+            setValidPhoneNumber(false);
+        } else if (phoneNumber.length < 11) {
+            setPhoneNumberMsg('휴대폰번호를 모두 입력해주세요');
+            setValidPhoneNumber(false);
+        } else {
+            setPhoneNumberMsg('');
+            setValidPhoneNumber(true);
         }
     }
 
 
-    //======================
+    //======================================================================================================================
     function join() {
-        if (id === null || pw === null || name === null || birth === null || phoneNum === null) {
-            alert(`모든 항목을 입력해주세요.`);
-        }
+        console.log(id);
+        console.log(pw);
+        console.log(name);
+        console.log(birth);
+        console.log(phoneNumber);
 
-        const data = {
-            id: id,
-            pw: pw,
-            name: name,
-            birth: birth,
-            phoneNum: phoneNum
-        }
 
-        axios
-            .post(`/user/join`, data)
-            .then((r) => {
-                alert(`회원가입 완료`);
-            }).catch((e) => {
-                console.log(`회원가입 실패`);
-            })
+        if (validId && vaildPw && pw === confirmPw && validName && birth !== null && validPhoneNumber) {
+
+            const data = {
+                id: id,
+                password: pw,
+                user_name: name,
+                birth: birth,
+                phone_number: phoneNumber
+            }
+
+            axios
+                .post(`/user/join`, data)
+                .then((r) => {
+                    alert(`회원가입 완료`);
+                }).catch((e) => {
+                    console.log(`회원가입 실패`);
+                    alert(`회원가입 실패`);
+                })
+
+        } else if (validId === false) {
+            alert(`아이디 중복체크 검사를 해야합니다`);
+        } else {
+            alert(`각 항목을 조건에 맞게 모두 입력해주세요`);
+        }
     }
 
 
@@ -162,16 +182,20 @@ function JoinPage() {
 
                 <div className='joinId'>
                     <span>생년월일</span>
-                    <input type="text" value={birth} onChange={(e) => { setBirth(e.target.value) }} required autoComplete='off'
-
-                    />
+                    <input type="date" value={birth} onChange={(e) => setBirth(e.target.value)} />
                 </div>
 
                 <div className='joinId'>
                     <span>휴대폰번호</span>
-                    <input type="text" value={phoneNum} onChange={(e) => { setPhoneNum(e.target.value) }} required autoComplete='off'
-                        minLength={11} maxLength={11}
+                    <input type="text" value={phoneNumber}
+                        onChange={(e) => {
+                            setPhoneNumber(e.target.value)
+                            setPhoneNumberMsg('');
+                        }}
+                        required autoComplete='off'
+                        minLength={11} maxLength={11} placeholder={`' - '없이 010포함해서 작성해주세요`} onBlur={handleValidatePhoneNumber}
                     />
+                    <span>{phoneNumberMsg}</span>
                 </div>
             </div>
 

@@ -1,5 +1,6 @@
 package com.res.pla.controller;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,13 +70,26 @@ public class UserController {
 		}
 	}
 
-	//====[2. 회원가입]========================================================================================
-	//	@PostMapping("/join")
-	//	public ResponseEntity<?> join(@RequestBody UserDTO data) {
-	//
-	//	}
+	// ====[2. 회원가입]========================================================================================
+	@PostMapping("/join")
+	public ResponseEntity<?> join(@RequestBody UserDTO data) {
+		try {
+			log.info("join Data : {}", data);
 
-	//====[2. 로그인 유저 실시간 정보]========================================================================================
+			String id = data.getId();
+			String password = data.getPassword();
+			String user_name = data.getUser_name();
+			LocalDate birth = data.getBirth();
+			String phone_number = data.getPhone_number();
+
+			return ResponseEntity.ok().body("good");
+
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	//====[?. 로그인 유저 실시간 정보]========================================================================================
 	@PostMapping("/loginedUser")
 	public ResponseEntity<?> loginedUser(@RequestBody Map<String, String> idData) {
 		try {

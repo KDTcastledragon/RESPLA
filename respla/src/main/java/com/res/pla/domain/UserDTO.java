@@ -1,5 +1,6 @@
 package com.res.pla.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ public class UserDTO {
 	private String password;
 
 	private String user_name;
-	private LocalDateTime birth;
+	private LocalDate birth;
 	private String phone_number;
 
 	private LocalDateTime join_date;
