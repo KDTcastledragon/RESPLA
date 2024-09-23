@@ -57,9 +57,9 @@ function LogInPage() {
                             onChange={(e) => setPw(e.target.value)} minLength={15} />
                     </div>
 
-                    <div className='findJoinBox'>
+                    <div className='findAndJoinBox'>
                         <button onClick={() => navigator('/')}>아이디/비밀번호 찾기</button>
-                        <button onClick={() => navigator('/')}>회원가입</button>
+                        <button onClick={() => navigator('/JoinPage')}>회원가입</button>
                     </div>
                 </div>
 
