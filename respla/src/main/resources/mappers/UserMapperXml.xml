@@ -13,6 +13,17 @@
         SELECT * FROM user
     </select>
     
+    <insert id="join">
+    	insert into user(id,password,user_name,birth,phone_number)
+    	values(
+    		#{id},
+    		#{password},
+    		#{user_name},
+    		#{birth},
+    		#{phone_number}
+    	)
+    </insert>
+    
     <select id="selectBySearchWord" resultType="com.res.pla.domain.UserDTO">
         SELECT * FROM user where id like concat('%',#{searchWord},'%')
         	OR user_name LIKE CONCAT('%', #{searchWord}, '%')

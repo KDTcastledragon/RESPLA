@@ -55,6 +55,8 @@ public class UserServiceImpl implements UserService {
 	public boolean join(String id, String password, String user_name, LocalDate birth, String phone_number) {
 
 		int isJoined = usermapper.join(id, password, user_name, birth, phone_number);
+
+		log.info("뭐가문제지??? : {}", isJoined);
 		return isJoined > 0;
 
 	}

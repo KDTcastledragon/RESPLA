@@ -95,7 +95,7 @@ public class UserController {
 	public ResponseEntity<?> join(@RequestBody UserDTO data) {
 		try {
 			log.info("");
-			//			log.info("join Data : {}", data);
+			log.info("join Data : {}", data);
 
 			String id = data.getId();
 			String password = data.getPassword();
@@ -105,9 +105,16 @@ public class UserController {
 
 			log.info("회원가입 : {} {} {} {} {}", id, password, user_name, birth, phone_number);
 
-			userservice.join(id, password, user_name, birth, phone_number);
+			boolean isJoined = userservice.join(id, password, user_name, birth, phone_number);
 
-			return ResponseEntity.ok().body("good");
+			log.info("뭐가문제냐구웅웅웅 : {}", isJoined);
+
+			if (isJoined == true) {
+				return ResponseEntity.ok().build();
+
+			} else {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("bad Request");
+			}
 
 		} catch (Exception e) {
 			throw e;
