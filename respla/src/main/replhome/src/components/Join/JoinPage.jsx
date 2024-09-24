@@ -50,25 +50,31 @@ function JoinPage() {
 
     //======================
     function idDupCheck() {
-        // if (id.length < 5 || id.length > 10) {
-        //     alert('아이디는 5자 이상, 10자 이하여야 합니다.');
-        // } else if (!idRegex.test(id)) {
-        //     alert(`아이디는 영문과 숫자만 가능합니다.`);
-        // } else {
-        //     const data = { id: id }
+        if (id.length < 5 || id.length > 10) {
+            alert('아이디는 5자 이상, 10자 이하여야 합니다.');
+            setValidId(false);
+        } else if (!idRegex.test(id)) {
+            alert(`아이디는 영문과 숫자만 가능합니다.`);
+            setValidId(false);
+        } else {
+            const data = { id: id }
 
-        //     axios
-        //         .post('/user/idDupCheck', data)
-        //         .then((r) => {
-        //             alert(`가능`);
-        //             setValidId(true);
-        //         }).catch((e) => {
-        //             alert(`겹침ㄴㄴ`);
-        //         })
-        // }
+            axios
+                .post('/user/idDupCheck', data)
+                .then((r) => {
+                    alert(`사용가능한 아이디 입니다.`);
+                    setValidId(true);
 
-        setValidId(true);
-        alert(`valid Id True`);
+                }).catch((e) => {
+                    setValidId(false);
+
+                    if (e.response.status === 409) {
+                        alert(`이미 존재하는 아이디 입니다.`);
+                    } else {
+                        alert(`오류`);
+                    }
+                })
+        }
     }
 
     //======================
@@ -160,13 +166,19 @@ function JoinPage() {
     return (
         <div className='JoinPageContainer'>
             <div className='joinTitle'><span>회원가입</span></div>
+
             <div className='joinMemberData'>
                 <div className='joinId'>
                     <span>아이디</span>
-                    <input type="text" value={id} onChange={(e) => { setId(e.target.value) }}
+                    <input type="text" value={id} onChange={(e) => {
+                        setId(e.target.value)
+                        setValidId(false);
+                    }}
                         required autoComplete='off' minLength={5} maxLength={10}
                     />
-                    <button onClick={() => idDupCheck(id)}>중복체크</button>
+                    {validId ? <button onClick={() => idDupCheck(id)} disabled>사용가능</button>
+                        : <button onClick={() => idDupCheck(id)}>중복체크</button>}
+
                 </div>
 
                 <div className='joinId'>

@@ -70,7 +70,27 @@ public class UserController {
 		}
 	}
 
-	// ====[2. 회원가입]========================================================================================
+	// ====[?. 회원가입]========================================================================================
+	@PostMapping("/idDupCheck")
+	public ResponseEntity<?> idDupCheck(@RequestBody UserDTO data) {
+		try {
+			log.info("");
+
+			String id = data.getId() != null ? data.getId() : null;
+
+			boolean isDuped = userservice.idDupCheck(id);
+
+			if (isDuped) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("conflict");
+			} else {
+				return ResponseEntity.ok().build();
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	// ====[?. 회원가입]========================================================================================
 	@PostMapping("/join")
 	public ResponseEntity<?> join(@RequestBody UserDTO data) {
 		try {

@@ -32,6 +32,15 @@
     height: 300px;
     background-color: rgb(255, 202, 202);
     margin: 10px auto;
+
+}
+
+
+.joinId select {
+    width: 80px;
+    height: 30px;
+    font-size: 16px;
+    text-align: center;
 }
 
 
@@ -57,11 +66,4 @@
         opacity: 0.2;
         background-color: rgb(0, 0, 0);
     }
-}
-
-.joinId select {
-    width: 80px;
-    height: 30px;
-    font-size: 16px;
-    text-align: center;
 }

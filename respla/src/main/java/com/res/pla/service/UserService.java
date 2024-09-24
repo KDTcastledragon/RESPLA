@@ -23,4 +23,6 @@ public interface UserService {
 
 	boolean join(String id, String password, String user_name, LocalDate birth, String phone_number);
 
+	boolean idDupCheck(String id);
+
 }

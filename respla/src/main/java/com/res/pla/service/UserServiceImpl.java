@@ -41,6 +41,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public boolean idDupCheck(String id) {
+		UserDTO existUser = usermapper.selectUser(id);
+
+		if (existUser == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	@Override
 	public boolean join(String id, String password, String user_name, LocalDate birth, String phone_number) {
 
 		int isJoined = usermapper.join(id, password, user_name, birth, phone_number);
