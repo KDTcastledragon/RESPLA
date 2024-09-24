@@ -1,6 +1,10 @@
 import './JoinPage.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+// import DatePicker from 'react-datepicker';
+// import "react-datepicker/dist/react-datepicker.css";
 
 function JoinPage() {
     const [id, setId] = useState('');
@@ -20,7 +24,9 @@ function JoinPage() {
     const [validPhoneNumber, setValidPhoneNumber] = useState(false);
     const [phoneNumberMsg, setPhoneNumberMsg] = useState('');
 
-    const [birth, setBirth] = useState();
+    const [year, setYear] = useState();
+    const [month, setMonth] = useState();
+    const [day, setDay] = useState();
 
     const [activeJoinButton, setActiveJoinButton] = useState(true);
 
@@ -30,6 +36,17 @@ function JoinPage() {
     const nameRegex = /^[가-힣a-zA-Z]*$/;
     const phoneNumberRegex = /^010\d{7,8}$/;
 
+
+    // ** 생년월일 select 생성
+    const currentYear = new Date().getFullYear();
+    const yearList = Array.from({ length: 130 }, (_, index) => currentYear - index);
+    const monthList = Array.from({ length: 12 }, (_, index) => index + 1);
+    const dayList = Array.from({ length: 31 }, (_, index) => index + 1)
+
+    // ** 숫자가 1자리인 경우 앞에 0을 붙임
+    const formatDateNumber = (number) => {
+        return String(number).padStart(2, '0');
+    };
 
     //======================
     function idDupCheck() {
@@ -97,23 +114,28 @@ function JoinPage() {
         }
     }
 
+    console.log(id);
+    console.log(pw);
+    console.log(name);
+    console.log(`${year}-${month}-${day}`);
+    console.log(phoneNumber);
 
     //======================================================================================================================
     function join() {
         console.log(id);
         console.log(pw);
         console.log(name);
-        console.log(birth);
+        console.log(`${year}-${month}-${day}`);
         console.log(phoneNumber);
 
 
-        if (validId && vaildPw && pw === confirmPw && validName && birth !== null && validPhoneNumber) {
+        if (validId && vaildPw && pw === confirmPw && validName && id !== null && validPhoneNumber) {
 
             const data = {
                 id: id,
                 password: pw,
                 user_name: name,
-                birth: birth,
+                birth: null,
                 phone_number: phoneNumber
             }
 
@@ -183,8 +205,31 @@ function JoinPage() {
                 </div>
 
                 <div className='joinId'>
-                    <span>생년월일</span>
-                    <input type="date" value={birth} onChange={(e) => setBirth(e.target.value)} />
+                    <div>
+                        <span className=''>생년월일</span>
+                        <select required onChange={(e) => setYear(e.target.value)}>
+                            {yearList.map((year) => (
+                                <option key={year} value={year}>
+                                    {year}
+                                </option>
+                            ))}
+                        </select>
+                        <span>년</span>
+
+                        <select required onChange={(e) => setMonth(e.target.value)} size={1}>
+                            {monthList.map((month) => (
+                                <option key={month} value={month}>{formatDateNumber(month)}</option>
+                            ))}
+                        </select>
+                        <span>월</span>
+
+                        <select required onChange={(e) => setDay(e.target.value)}>
+                            {dayList.map((day) => (
+                                <option key={day} value={day}>{formatDateNumber(day)}</option>
+                            ))}
+                        </select>
+                        <span>일</span>
+                    </div>
                 </div>
 
                 <div className='joinId'>
