@@ -15,21 +15,20 @@ function AdminLogInPage() {
     // }, [])
 
     function adminLogIn() {
-        axios({
-            url: "/user/adminLogIn",
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            data: {
-                id: id,
-                password: password
-            }
-
-        }).then((r) => {
-            sessionStorage.setItem('authenticatedAdminID', r.data.id);
-            navigator('/AdminPage');
-        }).catch((e) => {
-            alert(`허가되지 않음`);
-        })
+        const data = { id: id, password: password }
+        axios
+            .post(`/admin/adminLogin2`, data)
+            .then((r) => {
+                console.log(r.data);
+                sessionStorage.setItem('admin_name', r.data.admin_name);
+                sessionStorage.setItem('authentication', r.data.authentication);
+                sessionStorage.setItem('admcode', r.data.admcode);
+                navigator('/AdminPage');
+                alert(`성공`);
+                window.location.reload();
+            }).catch((e) => {
+                alert(``);
+            })
     }
 
     const goHome = () => {

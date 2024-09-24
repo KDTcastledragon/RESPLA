@@ -11,3 +11,14 @@
     background-color: rgb(241, 250, 255);
 
 }
+
+.AppPatherAdminMenuBarRouteBody {
+    display: flex;
+}
+
+.AppPatherAdminRouteBody {
+    width: 1350px;
+    height: 600px;
+    background-color: aqua;
+    margin: 10px auto;
+}

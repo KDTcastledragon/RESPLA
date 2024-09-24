@@ -10,11 +10,11 @@ import AdminLogInPage from '../Admin/AdminLogInPage';
 
 //===================================================================================================================
 function AppPather() {
-    const adminID = sessionStorage.getItem('authenticatedAdminID');
+    const code = sessionStorage.getItem('admcode');
     const authenAdmin = sessionStorage.getItem('authenticationAdminPage');
     return (
         <>
-            {adminID === 'superAdmin' ?
+            {code === 's9811' || code === 's377' || code === 's014' ?
                 <>
                     <AdminPageHeader></AdminPageHeader>
                     <div className="AppPatherAdminMenuBarRouteBody">
@@ -26,11 +26,6 @@ function AppPather() {
                         </div>
                     </div>
                 </>
-
-                // : authenAdmin === 'adminLogIn' ?
-                //     <>
-                //         <RouteBody></RouteBody>
-                //     </>
 
                 :
                 <>

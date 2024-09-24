@@ -2,24 +2,14 @@ import './AdminPage.css';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import UserListPage from './UserList/UserListPage';
-
 function AdminPage() {
 
     const navigator = useNavigate();
 
-    const adminID = sessionStorage.getItem('authenticatedAdminID');
+    const admcode = sessionStorage.getItem('admcode');
+    const authentication = sessionStorage.getItem('authentication');
 
-    // useEffect(() => {
-    //     const id = sessionStorage.getItem('loginID');
-    //     if (adminID === 'superAdmin') {
-    //         setLoginID(id);
-    //     } else {
-    //         navigator('/');  // 로그인되지 않은 상태에서 접근 시 홈으로 리다이렉트
-    //         alert(`허가되지 않은 접근`);
-    //         window.location.reload();
-    //     }
-    // }, [navigator]);
+    console.log(admcode);
 
     const logout = () => {
         sessionStorage.clear();
@@ -29,10 +19,10 @@ function AdminPage() {
 
     return (
         <>
-            {adminID === 'superAdmin' ?
+            {admcode === 's9811' || admcode === 's377' || admcode === 's014' ?
                 <div className='AdminPageContainer'>
 
-                    <div>{adminID}</div>
+                    <div>{authentication}</div>
                     <button onClick={logout}>로그아웃</button>
                 </div>
 

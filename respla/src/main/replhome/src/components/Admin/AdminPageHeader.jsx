@@ -4,21 +4,21 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function AdminPageHeader() {
     const navi = useNavigate();
-    const [loginID, setLoginID] = useState(sessionStorage.getItem('loginID'));
+    const code = sessionStorage.getItem('admcode');
 
-    useEffect(() => {
-        const updateLoginID = () => {
-            setLoginID(sessionStorage.getItem('loginID'));
-        };
+    // useEffect(() => {
+    //     const updateLoginID = () => {
+    //         setLoginID(sessionStorage.getItem('loginID'));
+    //     };
 
-        updateLoginID();
+    //     updateLoginID();
 
-        const interval = setInterval(updateLoginID, 20);
+    //     const interval = setInterval(updateLoginID, 20);
 
-        return () => {
-            clearInterval(interval);
-        };
-    }, []);
+    //     return () => {
+    //         clearInterval(interval);
+    //     };
+    // }, []);
 
     //====[adminMenu reset]================================================
     function moveAdminPage() {
@@ -30,7 +30,7 @@ function AdminPageHeader() {
 
     return (
         <>
-            {loginID === 'admin' ?
+            {code === 's9811' || code === 's377' || code === 's014' ?
                 <>
                     <div className='AdminPageHeaderContainer'>
                         <div className='AdminHeaderLogoTitleBox'>
