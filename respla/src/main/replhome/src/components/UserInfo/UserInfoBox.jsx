@@ -55,7 +55,7 @@ function UserInfoBox(props) {
 
                 <div className='userLoginedState'>
                     <div className='loginedStateUserWelcome'>
-                        <span className='welcomeId'>{uData.userId}</span>
+                        <span className='welcomeId'>{uData.userName}</span>
                         <span className='welcomeComment'> 님 환영합니다.</span>
                     </div>
                 </div>

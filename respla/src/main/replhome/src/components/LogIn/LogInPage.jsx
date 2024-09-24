@@ -14,29 +14,44 @@ function LogInPage() {
 
     // =====[로그인]======================================================
     function loginButton() {
-        const data = { id: id, pw: pw }
+        const data = { id: id, password: pw }
 
-        if (id === null) {
+        if (!id) {
             alert(`아이디를 입력해주세요.`);
 
-        } else if (pw === null) {
+        } else if (!pw) {
             alert(`비밀번호를 입력해주세요.`);
 
         } else {
             axios
                 .post(`/user/login`, data)
                 .then((res) => {
-                    sessionStorage.setItem('loginID', res.data.id);
+                    sessionStorage.setItem('loginID', res.data);
                     navigator('/');
+                    alert(`로그인 성공`);
 
-                }).catch((error) => {
-                    if (error.response.status === 401) {
-                        alert('아이디없음');
-                    } else if (error.response.status === 403) {
-                        alert('이용이 제한된 사용자입니다.');
+                }).catch((e) => {
+                    if (e.response.status) {
+                        switch (e.response.status) {
+                            case 401:
+                                alert('아이디 없음');
+                                break;
+
+                            case 403:
+                                alert('이용이 제한된 사용자입니다.');
+                                break;
+
+                            case 409:
+                                alert(`비밀번호가 틀립니다.`);
+                                break;
+
+                            default:
+                                alert(`로그인 오류`);
+                                break;
+                        }
+                    } else {
+                        alert(`알 수 없는 오류`);
                     }
-
-                    window.location.reload();
                 });
         }
     }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.res.pla.domain.UserDTO;
@@ -30,6 +31,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UsageHistoryMapper usgmapper;
 
+	@Autowired
+	PasswordEncoder encoder;
+
 	@Override
 	public List<UserDTO> selectAllUsers() {
 		return usermapper.selectAllUsers();
@@ -53,10 +57,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean join(String id, String password, String user_name, LocalDate birth, String phone_number) {
+		String encodedPassword = encoder.encode(password);
 
-		int isJoined = usermapper.join(id, password, user_name, birth, phone_number);
+		int isJoined = usermapper.join(id, encodedPassword, user_name, birth, phone_number);
 
-		log.info("뭐가문제지??? : {}", isJoined);
+		log.info("뭐가문제지??? : {} {}", isJoined, encodedPassword);
 		return isJoined > 0;
 
 	}

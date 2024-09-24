@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,12 +36,13 @@ public class UserController {
 	UserService userservice;
 	SeatService seatservice;
 	SeatFacade seatfacade;
+	PasswordEncoder encoder;
 
 	//====[1. 로그인]========================================================================================
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody UserDTO request) {
 		String id = request.getId();
-		String pw = request.getPassword();
+		String password = request.getPassword();
 
 		log.info("request.id :" + id);
 
@@ -53,20 +55,19 @@ public class UserController {
 				return ResponseEntity.status(HttpStatus.FORBIDDEN).body("benned_user");
 
 			} else {
-				boolean isMatchedId = userservice.matchId(id);
+				log.info("비밀번호 일치??? {} {}", password, dto.getPassword());
 
-				if (isMatchedId) {
-					log.info("비밀번호 일치 검사");
-
-					return new ResponseEntity<>(dto, HttpStatus.OK);
+				if (encoder.matches(password, dto.getPassword())) {
+					return ResponseEntity.ok().body(id);
 
 				} else {
-					return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("bad");
+					return ResponseEntity.status(HttpStatus.CONFLICT).body("no match pw");
 				}
+
 			}
 
 		} else {
-			return new ResponseEntity<>(dto, HttpStatus.UNAUTHORIZED);
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("no user Data");
 		}
 	}
 
@@ -125,12 +126,15 @@ public class UserController {
 	@PostMapping("/loginedUser")
 	public ResponseEntity<?> loginedUser(@RequestBody Map<String, String> idData) {
 		try {
+			log.info("로그인 유저 정보 : {}", idData);
 			String id = idData.get("id");
+			String name = userservice.selectUser(id) != null ? userservice.selectUser(id).getUser_name() : null;
 			boolean isUserCheckedIn = seatfacade.isUserCheckedIn(id); // 입실 여부 확인
 
 			Map<String, Object> loginedUserData = new HashMap<>();
 
 			loginedUserData.put("userId", id);
+			loginedUserData.put("userName", name);
 			loginedUserData.put("isCheckedIn", isUserCheckedIn);
 
 			if (isUserCheckedIn) {
@@ -144,20 +148,16 @@ public class UserController {
 				if (upp.getP_type().equals("m")) {
 					loginedUserData.put("time_value", upp.getTime_value());
 					loginedUserData.put("available_time", upp.getAvailable_time());
-					//					loginedUserData.put("used_time", upp.getUsed_time());
 
 				} else if (upp.getP_type().equals("d") || upp.getP_type().equals("f")) {
 					loginedUserData.put("day_value", upp.getDay_value());
 					loginedUserData.put("end_date", upp.getEnd_date());
-					//					loginedUserData.put("start_date", upp.getStart_date());
 
 				} else {
 					log.info("로그인 사용자 upp p_type 오류");
 					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("p_type error");
 				}
 			}
-
-			//			log.info("loginedUserData 전송 : " + loginedUserData.toString());
 
 			return ResponseEntity.ok().body(loginedUserData);
 
