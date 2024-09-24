@@ -1,5 +1,6 @@
 package com.res.pla.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO selectUser(String id) {
 		return usermapper.selectUser(id);
+	}
+
+	@Override
+	public boolean join(String id, String password, String user_name, LocalDate birth, String phone_number) {
+
+		int isJoined = usermapper.join(id, password, user_name, birth, phone_number);
+		return isJoined > 0;
+
 	}
 
 	@Override

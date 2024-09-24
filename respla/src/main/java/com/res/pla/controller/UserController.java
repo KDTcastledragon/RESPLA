@@ -74,13 +74,18 @@ public class UserController {
 	@PostMapping("/join")
 	public ResponseEntity<?> join(@RequestBody UserDTO data) {
 		try {
-			log.info("join Data : {}", data);
+			log.info("");
+			//			log.info("join Data : {}", data);
 
 			String id = data.getId();
 			String password = data.getPassword();
 			String user_name = data.getUser_name();
 			LocalDate birth = data.getBirth();
 			String phone_number = data.getPhone_number();
+
+			log.info("회원가입 : {} {} {} {} {}", id, password, user_name, birth, phone_number);
+
+			userservice.join(id, password, user_name, birth, phone_number);
 
 			return ResponseEntity.ok().body("good");
 

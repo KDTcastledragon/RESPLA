@@ -22,6 +22,8 @@ function JoinPage() {
 
     const [birth, setBirth] = useState();
 
+    const [activeJoinButton, setActiveJoinButton] = useState(true);
+
     const idRegex = /^[a-zA-Z0-9]*$/;
     const pwRegex = /[!@#$%^&*(),.?":{}|<>]/;
     const noKorPwRegex = /^[^가-힣]*$/;
@@ -199,7 +201,7 @@ function JoinPage() {
                 </div>
             </div>
 
-            <div className='joinButton'><button onClick={join}>가입하기</button></div>
+            <div className='joinButton'><button onClick={join} disabled={activeJoinButton}>가입하기</button></div>
         </div>
     );
 }

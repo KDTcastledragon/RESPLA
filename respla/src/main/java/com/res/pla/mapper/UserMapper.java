@@ -1,5 +1,6 @@
 package com.res.pla.mapper;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -26,5 +27,7 @@ public interface UserMapper {
 	int updateBenCause(String id, String cause);
 
 	int benCountUp(String id);
+
+	int join(String id, String password, String user_name, LocalDate birth, String phone_number);
 
 }
