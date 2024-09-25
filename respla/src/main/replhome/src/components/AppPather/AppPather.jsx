@@ -14,7 +14,7 @@ function AppPather() {
     const authenAdmin = sessionStorage.getItem('authenticationAdminPage');
     return (
         <>
-            {code === 's9811' || code === 's377' || code === 's014' ?
+            {code === 's9811' || code === 'a377' || code === 'd14' ?
                 <>
                     <AdminPageHeader></AdminPageHeader>
                     <div className="AppPatherAdminMenuBarRouteBody">

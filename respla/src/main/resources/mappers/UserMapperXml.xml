@@ -35,7 +35,7 @@
     </select>
     
     <select id="selectByBenned" resultType="com.res.pla.domain.UserDTO">
-        SELECT * FROM user where is_benned = #{opt}
+        SELECT * FROM user where benned = #{opt}
     </select>
     
     <update id="convertIsBenned">

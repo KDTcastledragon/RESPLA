@@ -39,9 +39,9 @@ public class AdminController {
 			Map<String, Object> adminData = new HashMap<>();
 
 			adminData.put("admin_name", dto.getAdmin_name());
-			adminData.put("authentication", dto.getAuthentication());
+			adminData.put("authority", dto.getAuthority());
 			//			adminData.put("admcode", "s9811");
-			adminData.put("admcode", "s377");
+			adminData.put("admcode", "s9811");
 
 			return ResponseEntity.ok().body(adminData);
 		} else {
@@ -63,7 +63,7 @@ public class AdminController {
 				Map<String, Object> adminData = new HashMap<>();
 
 				adminData.put("admin_name", dto.getAdmin_name());
-				adminData.put("authentication", dto.getAuthentication());
+				adminData.put("authentication", dto.getAuthority());
 
 				return ResponseEntity.ok().body(adminData);
 			} else {

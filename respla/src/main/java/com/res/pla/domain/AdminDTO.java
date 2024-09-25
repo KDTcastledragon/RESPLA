@@ -14,8 +14,9 @@ public class AdminDTO {
 	private String password;
 
 	private String admin_name;
+	private String admin_phone_number;
 
-	private String authentication;
+	private String authority;
 
 	private LocalDateTime latest_update_date;
 

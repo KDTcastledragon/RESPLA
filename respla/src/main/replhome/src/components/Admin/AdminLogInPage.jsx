@@ -21,7 +21,7 @@ function AdminLogInPage() {
             .then((r) => {
                 console.log(r.data);
                 sessionStorage.setItem('admin_name', r.data.admin_name);
-                sessionStorage.setItem('authentication', r.data.authentication);
+                sessionStorage.setItem('authority', r.data.authority);
                 sessionStorage.setItem('admcode', r.data.admcode);
                 navigator('/AdminPage');
                 alert(`성공`);
@@ -54,7 +54,7 @@ function AdminLogInPage() {
                     />
                 </div>
 
-                <div className='adminLogInButton'><button onClick={adminLogIn}>로그인</button></div>
+                <div className='adminLogInButton'><button onClick={adminLogIn}>→</button></div>
             </div>
             <div className='adminHomeButton'><button onClick={goHome}>홈으로</button></div>
         </div>

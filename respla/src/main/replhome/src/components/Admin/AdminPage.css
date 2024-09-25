@@ -1,1 +1,47 @@
-/* .AdminPageContainer {} */
+.AdminPageContainer {
+    width: 99%;
+    height: 99%;
+    /* background-color: rgb(218, 255, 243); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.adminInFormation {
+    width: 300px;
+    height: 500px;
+    background-color: rgb(191, 184, 255);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+}
+
+.adminAuthority {
+    width: 250px;
+    height: 60px;
+    line-height: 60px;
+    /* background-color: aqua; */
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.adminInFormation>button {
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+    background-color: white;
+    border: none;
+    font-size: 20px;
+    font-style: italic;
+}
+
+.adminInFormation>button:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}
