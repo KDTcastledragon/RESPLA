@@ -30,7 +30,6 @@ function UserListPage() {
         axios
             .get(`/user/allUserList`)
             .then((r) => {
-                // console.log(`유저리스트 성공 : ${r.data}`);
                 setUserList(r.data);
             }).catch((e) => {
                 alert(`유저리스트 실패`);
@@ -46,7 +45,6 @@ function UserListPage() {
             .then((r) => {
                 setUserList(r.data);
             }).catch((e) => {
-                console.log(`검색실패 : ${e.message}`);
                 alert(`검색어를 입력해주세요.`);
             })
     }
@@ -59,7 +57,6 @@ function UserListPage() {
             .then((r) => {
                 setUserList(r.data);
             }).catch((e) => {
-                console.log(`검색실패 : ${e.message}`);
                 alert(`체크인기준 오류.`);
             })
     }
